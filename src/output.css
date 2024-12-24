@@ -1450,6 +1450,14 @@ video {
   background-color: rgb(59 130 246 / 0.3);
 }
 
+.hover\:bg-blue-500\/20:hover {
+  background-color: rgb(59 130 246 / 0.2);
+}
+
+.hover\:bg-purple-500\/40:hover {
+  background-color: rgb(168 85 247 / 0.4);
+}
+
 .hover\:text-slate-300:hover {
   --tw-text-opacity: 1;
   color: rgb(203 213 225 / var(--tw-text-opacity, 1));
