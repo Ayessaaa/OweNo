@@ -916,6 +916,18 @@ video {
   background-color: rgb(147 51 234 / 0.8);
 }
 
+.bg-blue-600\/10 {
+  background-color: rgb(37 99 235 / 0.1);
+}
+
+.bg-blue-600\/20 {
+  background-color: rgb(37 99 235 / 0.2);
+}
+
+.bg-blue-600\/80 {
+  background-color: rgb(37 99 235 / 0.8);
+}
+
 .bg-gradient-to-l {
   background-image: linear-gradient(to left, var(--tw-gradient-stops));
 }
@@ -1254,12 +1266,59 @@ video {
   color: rgb(17 24 39 / var(--tw-text-opacity, 1));
 }
 
+.text-blue-400 {
+  --tw-text-opacity: 1;
+  color: rgb(96 165 250 / var(--tw-text-opacity, 1));
+}
+
+.text-purple-600 {
+  --tw-text-opacity: 1;
+  color: rgb(147 51 234 / var(--tw-text-opacity, 1));
+}
+
+.text-purple-700 {
+  --tw-text-opacity: 1;
+  color: rgb(126 34 206 / var(--tw-text-opacity, 1));
+}
+
+.text-purple-700\/80 {
+  color: rgb(126 34 206 / 0.8);
+}
+
+.text-purple-600\/80 {
+  color: rgb(147 51 234 / 0.8);
+}
+
+.text-purple-500\/80 {
+  color: rgb(168 85 247 / 0.8);
+}
+
+.text-purple-400\/80 {
+  color: rgb(192 132 252 / 0.8);
+}
+
+.text-purple-400\/90 {
+  color: rgb(192 132 252 / 0.9);
+}
+
+.text-blue-400\/90 {
+  color: rgb(96 165 250 / 0.9);
+}
+
 .placeholder-purple-300\/50::-moz-placeholder {
   color: rgb(216 180 254 / 0.5);
 }
 
 .placeholder-purple-300\/50::placeholder {
   color: rgb(216 180 254 / 0.5);
+}
+
+.placeholder-blue-300\/50::-moz-placeholder {
+  color: rgb(147 197 253 / 0.5);
+}
+
+.placeholder-blue-300\/50::placeholder {
+  color: rgb(147 197 253 / 0.5);
 }
 
 .accent-white {
@@ -1310,6 +1369,11 @@ video {
 
 .shadow-purple-600\/30 {
   --tw-shadow-color: rgb(147 51 234 / 0.3);
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.shadow-blue-600\/30 {
+  --tw-shadow-color: rgb(37 99 235 / 0.3);
   --tw-shadow: var(--tw-shadow-colored);
 }
 
@@ -1410,6 +1474,14 @@ video {
   background-color: rgb(147 51 234 / 0.2);
 }
 
+.hover\:bg-blue-600\/20:hover {
+  background-color: rgb(37 99 235 / 0.2);
+}
+
+.hover\:bg-blue-600\/30:hover {
+  background-color: rgb(37 99 235 / 0.3);
+}
+
 .hover\:text-slate-300:hover {
   --tw-text-opacity: 1;
   color: rgb(203 213 225 / var(--tw-text-opacity, 1));
@@ -1485,6 +1557,14 @@ video {
   background-color: rgb(147 51 234 / 0.3);
 }
 
+.focus\:bg-blue-600\/30:focus {
+  background-color: rgb(37 99 235 / 0.3);
+}
+
+.focus\:bg-blue-600\/40:focus {
+  background-color: rgb(37 99 235 / 0.4);
+}
+
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -1511,6 +1591,10 @@ video {
   --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity, 1));
 }
 
+.focus\:ring-blue-600\/50:focus {
+  --tw-ring-color: rgb(37 99 235 / 0.5);
+}
+
 .active\:bg-purple-600\/30:active {
   background-color: rgb(147 51 234 / 0.3);
 }
@@ -1525,6 +1609,18 @@ video {
 
 .active\:bg-purple-600\/90:active {
   background-color: rgb(147 51 234 / 0.9);
+}
+
+.active\:bg-blue-600\/40:active {
+  background-color: rgb(37 99 235 / 0.4);
+}
+
+.active\:bg-blue-600\/50:active {
+  background-color: rgb(37 99 235 / 0.5);
+}
+
+.active\:bg-blue-600\/90:active {
+  background-color: rgb(37 99 235 / 0.9);
 }
 
 .active\:outline-none:active {
@@ -1567,6 +1663,10 @@ video {
   --tw-ring-color: rgb(147 51 234 / 0.5);
 }
 
+.active\:ring-blue-600\/50:active {
+  --tw-ring-color: rgb(37 99 235 / 0.5);
+}
+
 .group:hover .group-hover\:text-blue-200\/80 {
   color: rgb(191 219 254 / 0.8);
 }
@@ -1583,6 +1683,32 @@ video {
 .group:hover .group-hover\:text-purple-300 {
   --tw-text-opacity: 1;
   color: rgb(216 180 254 / var(--tw-text-opacity, 1));
+}
+
+.group:hover .group-hover\:text-purple-500\/50 {
+  color: rgb(168 85 247 / 0.5);
+}
+
+.group:hover .group-hover\:text-purple-500\/90 {
+  color: rgb(168 85 247 / 0.9);
+}
+
+.group:hover .group-hover\:text-purple-300\/90 {
+  color: rgb(216 180 254 / 0.9);
+}
+
+.group:hover .group-hover\:text-purple-400\/90 {
+  color: rgb(192 132 252 / 0.9);
+}
+
+.group:hover .group-hover\:text-purple-400 {
+  --tw-text-opacity: 1;
+  color: rgb(192 132 252 / var(--tw-text-opacity, 1));
+}
+
+.group:hover .group-hover\:text-blue-400 {
+  --tw-text-opacity: 1;
+  color: rgb(96 165 250 / var(--tw-text-opacity, 1));
 }
 
 @media (min-width: 640px) {
