@@ -575,8 +575,20 @@ video {
   inset-inline-start: 0px;
 }
 
+.right-0 {
+  right: 0px;
+}
+
 .col-span-2 {
   grid-column: span 2 / span 2;
+}
+
+.m-5 {
+  margin: 1.25rem;
+}
+
+.m-2 {
+  margin: 0.5rem;
 }
 
 .mx-2 {
@@ -645,6 +657,14 @@ video {
   margin-top: 2rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
 .block {
   display: block;
 }
@@ -669,6 +689,11 @@ video {
 .size-7 {
   width: 1.75rem;
   height: 1.75rem;
+}
+
+.size-3 {
+  width: 0.75rem;
+  height: 0.75rem;
 }
 
 .h-4 {
@@ -723,6 +748,10 @@ video {
 
 .w-2\/3 {
   width: 66.666667%;
+}
+
+.w-3\/5 {
+  width: 60%;
 }
 
 .max-w-sm {
@@ -865,6 +894,14 @@ video {
   border-color: rgb(209 213 219 / var(--tw-border-opacity, 1));
 }
 
+.border-purple-500\/50 {
+  border-color: rgb(168 85 247 / 0.5);
+}
+
+.border-sky-500\/50 {
+  border-color: rgb(14 165 233 / 0.5);
+}
+
 .bg-blue-400\/10 {
   background-color: rgb(96 165 250 / 0.1);
 }
@@ -926,6 +963,24 @@ video {
 
 .bg-blue-600\/80 {
   background-color: rgb(37 99 235 / 0.8);
+}
+
+.bg-sky-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(14 165 233 / var(--tw-bg-opacity, 1));
+}
+
+.bg-sky-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(2 132 199 / var(--tw-bg-opacity, 1));
+}
+
+.bg-sky-600\/70 {
+  background-color: rgb(2 132 199 / 0.7);
+}
+
+.bg-sky-600\/80 {
+  background-color: rgb(2 132 199 / 0.8);
 }
 
 .bg-gradient-to-l {
@@ -1122,6 +1177,14 @@ video {
   padding-bottom: 1.25rem;
 }
 
+.pl-4 {
+  padding-left: 1rem;
+}
+
+.pr-1 {
+  padding-right: 0.25rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1303,6 +1366,39 @@ video {
 
 .text-blue-400\/90 {
   color: rgb(96 165 250 / 0.9);
+}
+
+.text-purple-400\/50 {
+  color: rgb(192 132 252 / 0.5);
+}
+
+.text-purple-200\/50 {
+  color: rgb(233 213 255 / 0.5);
+}
+
+.text-purple-200\/70 {
+  color: rgb(233 213 255 / 0.7);
+}
+
+.text-purple-300\/70 {
+  color: rgb(216 180 254 / 0.7);
+}
+
+.text-purple-300\/80 {
+  color: rgb(216 180 254 / 0.8);
+}
+
+.text-purple-300\/90 {
+  color: rgb(216 180 254 / 0.9);
+}
+
+.text-sky-500 {
+  --tw-text-opacity: 1;
+  color: rgb(14 165 233 / var(--tw-text-opacity, 1));
+}
+
+.text-white\/80 {
+  color: rgb(255 255 255 / 0.8);
 }
 
 .placeholder-purple-300\/50::-moz-placeholder {
@@ -1780,6 +1876,11 @@ video {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
+
+  .md\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -1859,6 +1960,10 @@ video {
 
   .\32xl\:w-2\/5 {
     width: 40%;
+  }
+
+  .\32xl\:w-1\/3 {
+    width: 33.333333%;
   }
 }
 
