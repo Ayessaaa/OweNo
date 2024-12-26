@@ -1,3 +1,5 @@
+// https://blog.logrocket.com/building-simple-login-form-node-js/
+
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
@@ -9,7 +11,16 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-app.listen(3000);
+const dbURI = process.env.DB_URI;
+if (!dbURI) {
+  throw new Error("MONGO_URI is not defined in the environment variables");
+}
+
+mongoose
+  .connect(dbURI)
+  .then((result) => app.listen(3000))
+  .then(() => console.log("DB connected"))
+  .catch((err) => console.log(err));
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -26,7 +37,6 @@ app.get("/log-in", (req, res) => {
 app.get("/my-debt-details", (req, res) => {
   res.render("myDebtDetails");
 });
-
 
 app.get("/", (req, res) => {
   res.redirect("/home");
@@ -67,9 +77,3 @@ app.get("/history", (req, res) => {
 app.get("/split-the-bill", (req, res) => {
   res.render("splitTheBill");
 });
-
-
-
-
-
-
