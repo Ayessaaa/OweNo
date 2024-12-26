@@ -6,6 +6,10 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const { render } = require("ejs");
 dotenv.config({ path: ".env" });
+const notifier = require("node-notifier");
+const bcrypt = require("bcryptjs");
+
+const User = require("./models/user");
 
 const app = express();
 
@@ -27,11 +31,51 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 app.get("/sign-up", (req, res) => {
-  res.render("sign-up");
+  res.render("sign-up", { error: false });
+});
+
+app.get("/sign-up/:taken", (req, res) => {
+  const taken = req.params.taken;
+  if (taken === "username-taken") {
+    res.render("sign-up", { error: true });
+  } else {
+    res.render("sign-up", { error: false });
+  }
 });
 
 app.get("/log-in", (req, res) => {
-  res.render("log-in");
+  res.render("log-in", { error: false });
+});
+
+app.get("/log-in:wrong", (req, res) => {
+  const wrong = req.params.wrong;
+  if (taken === "wrong-password") {
+    res.render("log-in", { error: true });
+  } else {
+    res.render("log-in", { error: false });
+  }
+});
+
+app.post("/auth/register", async (req, res) => {
+  const { username, password } = req.body;
+  console.log(username, password);
+  try {
+    const result = await User.find({ username: username });
+    if (result.length == 0) {
+      let hashedPassword = await bcrypt.hash(password, 8);
+      const newUser = new User({
+        username: username,
+        password: hashedPassword,
+      });
+
+      await newUser.save();
+      res.redirect("/home");
+    } else {
+      res.redirect("/sign-up/username-taken");
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.get("/my-debt-details", (req, res) => {

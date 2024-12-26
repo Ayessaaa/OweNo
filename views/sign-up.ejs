@@ -55,10 +55,16 @@
       </p>
     </div>
 
+    <% if(error){ %> 
+      <div class="w-96 py-1 text-center mx-auto border mt-5 text-red-500/70 bg-red-500/10 rounded-lg border-red-500/60">
+        Username is taken!
+      </div>
+    <% } %>
+
     <div
-      class="w-96 px-8 py-5 mx-auto border m-5 rounded-lg border-blue-500/70 bg-blue-500/10 transition-all hover:bg-blue-600/10"
+      class="w-96 px-8 py-5 mx-auto border m-2 rounded-lg border-blue-500/70 bg-blue-500/10 transition-all hover:bg-blue-600/10"
     >
-      <form action="auth/register" method="POST">
+      <form action="/auth/register" method="POST">
         <label for="username" class="text-blue-600 font-medium">Username</label
         ><br />
         <input
