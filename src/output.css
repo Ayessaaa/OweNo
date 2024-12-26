@@ -870,6 +870,14 @@ video {
   border-color: rgb(139 92 246 / 0.8);
 }
 
+.border-slate-500\/80 {
+  border-color: rgb(100 116 139 / 0.8);
+}
+
+.border-violet-500\/70 {
+  border-color: rgb(139 92 246 / 0.7);
+}
+
 .bg-blue-400\/10 {
   background-color: rgb(96 165 250 / 0.1);
 }
@@ -966,6 +974,14 @@ video {
 
 .bg-sky-600\/50 {
   background-color: rgb(2 132 199 / 0.5);
+}
+
+.bg-slate-500\/20 {
+  background-color: rgb(100 116 139 / 0.2);
+}
+
+.bg-blue-500\/20 {
+  background-color: rgb(59 130 246 / 0.2);
 }
 
 .bg-gradient-to-l {
@@ -1393,6 +1409,11 @@ video {
   color: rgb(37 99 235 / 0.8);
 }
 
+.text-violet-600 {
+  --tw-text-opacity: 1;
+  color: rgb(124 58 237 / var(--tw-text-opacity, 1));
+}
+
 .placeholder-blue-300\/50::-moz-placeholder {
   color: rgb(147 197 253 / 0.5);
 }
@@ -1431,6 +1452,14 @@ video {
 
 .placeholder-violet-300\/50::placeholder {
   color: rgb(196 181 253 / 0.5);
+}
+
+.placeholder-slate-300\/50::-moz-placeholder {
+  color: rgb(203 213 225 / 0.5);
+}
+
+.placeholder-slate-300\/50::placeholder {
+  color: rgb(203 213 225 / 0.5);
 }
 
 .accent-white {
@@ -1626,6 +1655,34 @@ video {
   background-color: rgb(124 58 237 / 0.3);
 }
 
+.hover\:bg-slate-600\/30:hover {
+  background-color: rgb(71 85 105 / 0.3);
+}
+
+.hover\:bg-slate-600\/40:hover {
+  background-color: rgb(71 85 105 / 0.4);
+}
+
+.hover\:bg-blue-500\/20:hover {
+  background-color: rgb(59 130 246 / 0.2);
+}
+
+.hover\:bg-blue-400\/20:hover {
+  background-color: rgb(96 165 250 / 0.2);
+}
+
+.hover\:bg-blue-400\/10:hover {
+  background-color: rgb(96 165 250 / 0.1);
+}
+
+.hover\:bg-blue-600\/10:hover {
+  background-color: rgb(37 99 235 / 0.1);
+}
+
+.hover\:bg-violet-600\/10:hover {
+  background-color: rgb(124 58 237 / 0.1);
+}
+
 .hover\:text-slate-300:hover {
   --tw-text-opacity: 1;
   color: rgb(203 213 225 / var(--tw-text-opacity, 1));
@@ -1710,6 +1767,14 @@ video {
   background-color: rgb(124 58 237 / 0.4);
 }
 
+.focus\:bg-slate-600\/40:focus {
+  background-color: rgb(71 85 105 / 0.4);
+}
+
+.focus\:bg-slate-600\/50:focus {
+  background-color: rgb(71 85 105 / 0.5);
+}
+
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -1739,6 +1804,10 @@ video {
 
 .focus\:ring-violet-600\/50:focus {
   --tw-ring-color: rgb(124 58 237 / 0.5);
+}
+
+.focus\:ring-slate-600\/50:focus {
+  --tw-ring-color: rgb(71 85 105 / 0.5);
 }
 
 .active\:bg-blue-600\/40:active {
@@ -1781,6 +1850,14 @@ video {
   background-color: rgb(124 58 237 / 0.5);
 }
 
+.active\:bg-slate-600\/50:active {
+  background-color: rgb(71 85 105 / 0.5);
+}
+
+.active\:bg-slate-600\/60:active {
+  background-color: rgb(71 85 105 / 0.6);
+}
+
 .active\:ring-blue-600\/50:active {
   --tw-ring-color: rgb(37 99 235 / 0.5);
 }
@@ -1799,6 +1876,10 @@ video {
 
 .active\:ring-violet-600\/50:active {
   --tw-ring-color: rgb(124 58 237 / 0.5);
+}
+
+.active\:ring-slate-600\/50:active {
+  --tw-ring-color: rgb(71 85 105 / 0.5);
 }
 
 .group:hover .group-hover\:text-blue-200\/80 {
