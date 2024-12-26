@@ -1,4 +1,5 @@
 // https://blog.logrocket.com/building-simple-login-form-node-js/
+// https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
 
 const express = require("express");
 const morgan = require("morgan");
@@ -34,9 +35,9 @@ app.get("/sign-up", (req, res) => {
   res.render("sign-up", { error: false });
 });
 
-app.get("/sign-up/:taken", (req, res) => {
-  const taken = req.params.taken;
-  if (taken === "username-taken") {
+app.get("/sign-up/:err", (req, res) => {
+  const err = req.params.err;
+  if (err === "username-taken") {
     res.render("sign-up", { error: true });
   } else {
     res.render("sign-up", { error: false });
@@ -47,16 +48,12 @@ app.get("/log-in", (req, res) => {
   res.render("log-in", { error: false });
 });
 
-app.get("/log-in:wrong", (req, res) => {
-  const wrong = req.params.wrong;
-  if (taken === "wrong-password") {
-    res.render("log-in", { error: true });
-  } else {
-    res.render("log-in", { error: false });
-  }
+app.get("/log-in/:err", (req, res) => {
+  const err = req.params.err;
+  res.render("log-in", { error: err });
 });
 
-app.post("/auth/register", async (req, res) => {
+app.post("/auth/signup", async (req, res) => {
   const { username, password } = req.body;
   console.log(username, password);
   try {
@@ -72,6 +69,32 @@ app.post("/auth/register", async (req, res) => {
       res.redirect("/home");
     } else {
       res.redirect("/sign-up/username-taken");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/auth/login", async (req, res) => {
+  const { username, password } = req.body;
+  console.log(username, password);
+  try {
+    const result = await User.find({ username: username });
+    if (result.length == 0) {
+      res.redirect("/log-in/acc-not-exists");
+    } else {
+      bcrypt.compare(password, result[0].password, (err, result) => {
+        if (err) {
+          console.error("Error comparing passwords:", err);
+          return;
+        }
+
+        if (result) {
+          res.redirect("/home")
+        } else {
+          res.redirect("/log-in/wrong-password");
+        }
+      });
     }
   } catch (error) {
     console.log(error);
