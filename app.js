@@ -1,16 +1,20 @@
 // https://blog.logrocket.com/building-simple-login-form-node-js/
 // https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
+// https://dev.to/saint_vandora/how-to-implement-session-management-in-nodejs-applications-5emm
 
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const bcrypt = require("bcryptjs");
+const session = require("express-session");
+const User = require("./models/user");
+const IOwe = require("./models/iOwe");
+
 const { render } = require("ejs");
 dotenv.config({ path: ".env" });
-const notifier = require("node-notifier");
-const bcrypt = require("bcryptjs");
 
-const User = require("./models/user");
+const authController = require("./controller/authController");
 
 const app = express();
 
@@ -30,117 +34,145 @@ mongoose
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+app.use(
+  session({
+    secret: process.env.secret,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
-app.get("/sign-up", (req, res) => {
-  res.render("sign-up", { error: false });
-});
+app.get("/sign-up", authController.signUp);
 
-app.get("/sign-up/:err", (req, res) => {
-  const err = req.params.err;
-  if (err === "username-taken") {
-    res.render("sign-up", { error: true });
-  } else {
-    res.render("sign-up", { error: false });
-  }
-});
+app.get("/sign-up/:err", authController.signUpError);
 
-app.get("/log-in", (req, res) => {
-  res.render("log-in", { error: false });
-});
+app.get("/log-in", authController.logIn);
 
-app.get("/log-in/:err", (req, res) => {
-  const err = req.params.err;
-  res.render("log-in", { error: err });
-});
+app.get("/log-in/:err", authController.logInError);
 
-app.post("/auth/signup", async (req, res) => {
-  const { username, password } = req.body;
-  console.log(username, password);
-  try {
-    const result = await User.find({ username: username });
-    if (result.length == 0) {
-      let hashedPassword = await bcrypt.hash(password, 8);
-      const newUser = new User({
-        username: username,
-        password: hashedPassword,
-      });
+app.post("/auth/signup", authController.authSignUp);
 
-      await newUser.save();
-      res.redirect("/home");
-    } else {
-      res.redirect("/sign-up/username-taken");
-    }
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-app.post("/auth/login", async (req, res) => {
-  const { username, password } = req.body;
-  console.log(username, password);
-  try {
-    const result = await User.find({ username: username });
-    if (result.length == 0) {
-      res.redirect("/log-in/acc-not-exists");
-    } else {
-      bcrypt.compare(password, result[0].password, (err, result) => {
-        if (err) {
-          console.error("Error comparing passwords:", err);
-          return;
-        }
-
-        if (result) {
-          res.redirect("/home")
-        } else {
-          res.redirect("/log-in/wrong-password");
-        }
-      });
-    }
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-app.get("/my-debt-details", (req, res) => {
-  res.render("myDebtDetails");
-});
+app.post("/auth/login", authController.authLogIn);
 
 app.get("/", (req, res) => {
   res.redirect("/home");
 });
 
 app.get("/home", (req, res) => {
-  res.render("index");
-});
+  console.log(req.session.username);
+  const isLoggedIn = req.session.isLoggedIn;
 
-app.get("/i-owe", (req, res) => {
-  res.render("iOwe");
-});
-
-app.get("/they-owe", (req, res) => {
-  res.render("theyOwe");
-});
-
-app.get("/i-borrow", (req, res) => {
-  res.render("iBorrow");
-});
-
-app.get("/they-borrow", (req, res) => {
-  res.render("theyBorrow");
+  if (isLoggedIn) {
+    res.render("index", {
+      username:
+        String(req.session.username).charAt(0).toUpperCase() +
+        String(req.session.username).slice(1),
+    });
+  } else {
+    res.redirect("/log-in");
+  }
 });
 
 app.get("/my-debt-details", (req, res) => {
-  res.render("myDebtDetails");
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.render("myDebtDetails");
+  } else {
+    res.redirect("/log-in");
+  }
+});
+
+app.get("/i-owe", (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.render("iOwe");
+  } else {
+    res.redirect("/log-in");
+  }
+});
+
+app.get("/they-owe", (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.render("theyOwe");
+  } else {
+    res.redirect("/log-in");
+  }
+});
+
+app.get("/i-borrow", (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    const { from, reason, due, amount } = req.body;
+    console.log(from, reason, due, amount);
+    res.render("iBorrow");
+  } else {
+    res.redirect("/log-in");
+  }
+});
+
+app.get("/i-borrow", (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    const { from, reason, due, amount } = req.body;
+    console.log(from, reason, due, amount);
+    res.render("iBorrow");
+  } else {
+    res.redirect("/log-in");
+  }
+});
+
+app.get("/they-borrow", (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.render("theyBorrow");
+  } else {
+    res.redirect("/log-in");
+  }
+});
+
+app.get("/my-debt-details", (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.render("myDebtDetails");
+  } else {
+    res.redirect("/log-in");
+  }
 });
 
 app.get("/their-debt-details", (req, res) => {
-  res.render("theirDebtDetails");
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.render("theirDebtDetails");
+  } else {
+    res.redirect("/log-in");
+  }
 });
 
 app.get("/history", (req, res) => {
-  res.render("history");
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.render("history");
+  } else {
+    res.redirect("/log-in");
+  }
 });
 
 app.get("/split-the-bill", (req, res) => {
-  res.render("splitTheBill");
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.render("splitTheBill");
+  } else {
+    res.redirect("/log-in");
+  }
 });
