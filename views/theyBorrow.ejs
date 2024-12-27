@@ -87,7 +87,7 @@
       </p>
     </div>
 
-    <div
+    <form action="/they-borrow" method="POST"
       class="py-5 px-0 md:p-5 mx-auto 2xl:w-2/5 xl:w-1/2 sm:w-2/3 w-4/5 transition-all"
     >
       <div class="w-fit mx-auto">
@@ -111,7 +111,7 @@
               <label for="borrower" class="text-blue-400 font-medium"
                 >Borrower:</label
               >
-              <input
+              <input required
                 type="text"
                 name="borrower"
                 placeholder="Name"
@@ -122,7 +122,7 @@
               <label for="reason" class="text-blue-400 font-medium"
                 >Reason:</label
               >
-              <input
+              <input required
                 type="text"
                 name="reason"
                 placeholder="Details"
@@ -130,12 +130,12 @@
               /><br />
             </div>
             <div class="mt-2 flex place-items-end">
-              <label for="date" class="text-blue-400 font-medium"
+              <label for="due" class="text-blue-400 font-medium"
                 >Due Date:</label
               >
-              <input
+              <input required
                 type="date"
-                name="date"
+                name="due"
                 placeholder="Date"
                 class="accent-white ml-2 text-sm rounded-md px-2 py-0.5 bg-blue-600/10 font-medium text-white placeholder-blue-300/50 hover:bg-blue-600/20 active:bg-blue-600/40 transition-all active:ring-blue-600/50 focus:ring-1 focus:outline-none focus:ring-blue-600/50 focus:bg-blue-600/30"
               />
@@ -149,7 +149,7 @@
               >Amount</label
             ><br />
             <span class="text-white align-bottom font-semibold mr-1">$</span>
-            <input
+            <input required
               placeholder="-"
               type="number"
               title="amount"
@@ -160,12 +160,12 @@
         </div>
       </div>
       <div class="mx-auto w-fit mt-3">
-        <button
+        <button type="submit"
           class="bg-blue-600/80 w-fit py-1 px-5 rounded-md text-white font-semibold mx-auto text-lg shadow-md shadow-blue-600/30 hover:bg-blue-600 transition-all hover:scale-105 hover:shadow-600/40 active:bg-blue-600/90"
         >
           Submit
         </button>
       </div>
-    </div>
+    </form>
   </body>
 </html>

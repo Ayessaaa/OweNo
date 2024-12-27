@@ -82,12 +82,12 @@
     <div
       class="w-fit mx-auto mt-10 text-md lg:text-lg flex flex-col sm:flex-row gap-2"
     >
-      <button
+      <button onclick="window.location.href = '/i-borrow'"
         class="hover:scale-105 transition-all mr-2 lg:mr-5 border-blue-500 border rounded-full px-4 py-1 font-medium text-blue-500 hover:text-white hover:bg-blue-500/80 hover:shadow-md hover:shadow-blue-500/50"
       >
         I Borrowed Money
       </button>
-      <button
+      <button onclick="window.location.href = '/they-borrow'"
         class="hover:scale-105 transition-all border-violet-500 border rounded-full px-4 py-1 font-medium text-violet-500 hover:text-white hover:bg-violet-500/80 hover:shadow-md hover:shadow-violet-500/50"
       >
         Someone Borrowed My Money
@@ -122,7 +122,10 @@
             I Owe
           </p>
           <p class="font-medium mt-3 ml-2">
-            $ <span class="text-3xl lg:text-4xl font-semibold">5.00</span>
+            $
+            <span class="text-3xl lg:text-4xl font-semibold"
+              ><%= userData.iowe.toFixed(2) %></span
+            >
           </p>
         </div>
 
@@ -150,7 +153,10 @@
             They Owe Me
           </p>
           <p class="font-medium mt-3 ml-2">
-            $ <span class="text-3xl lg:text-4xl font-semibold">23.00</span>
+            $
+            <span class="text-3xl lg:text-4xl font-semibold"
+              ><%= userData.theyowe.toFixed(2) %></span
+            >
           </p>
         </div>
 
@@ -160,9 +166,17 @@
           <p
             class="font-semibold mt-2 text-white text-base lg:text-xl drop-shadow-lg items-end text-center"
           >
-            December
+            <% const months = [ "January", "February", "March", "April", "May",
+            "June", "July", "August", "September", "October", "November",
+            "December", ]; 
+            const monthsShort = [ "Jan", "Febr", "Mar", "Apr", "May",
+            "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
+            "Dec", ]; 
+            const day = new Date();
+            %>
+            <%= months[day.getMonth()] %>
           </p>
-          <p class="font-bold mt-3 ml-2 text-4xl lg:text-5xl text-center">21</p>
+          <p class="font-bold mt-3 ml-2 text-4xl lg:text-5xl text-center"><%= day.getDate() %></p>
         </div>
       </div>
 
@@ -181,101 +195,65 @@
             Debts Due
           </p>
 
-          <div
-            class="group bg-purple-400/10 mt-2 mx-2 rounded text-white px-4 py-2 border border-purple-500/20 hover:bg-purple-500/50 transition-all hover:shadow-md hover:shadow-purple-600/30"
-          >
-            <div class="flex items-center">
-              <div class="font-semibold text-lg md:text-xl">
-                <p class="text-purple-400/90 group-hover:text-purple-400">
-                  $3.00
-                </p>
-                <p
-                  class="font-medium text-xs text-purple-200/60 group-hover:text-purple-200/80"
-                >
-                  Dec 29
-                </p>
-              </div>
-              <div class="flex-1 text-right">
-                <p class="font-semibold md:text-base text-sm">Me to David</p>
-                <p
-                  class="font-normal text-xs md:text-sm text-purple-200/60 md:-mt-0.5 group-hover:text-purple-200/80"
-                >
-                  Forgot my wallet to lunch
-                </p>
+          <% for (let i = 0; i < owesData.length; i++) {
+            const element = owesData[i];%>
+
+          <% if (element.owetype === "i"){%>
+
+            <div
+              class="group bg-purple-400/10 mt-2 mx-2 rounded text-white px-4 py-2 border border-purple-500/20 hover:bg-purple-500/50 transition-all hover:shadow-md hover:shadow-purple-600/30"
+            >
+              <div class="flex items-center">
+                <div class="font-semibold text-lg md:text-xl">
+                  <p class="text-purple-400/90 group-hover:text-purple-400">
+                    $<%= element.amount.toFixed(2) %>
+                  </p>
+                  <p
+                    class="font-medium text-xs text-purple-200/60 group-hover:text-purple-200/80"
+                  >
+                    <%= monthsShort[element.due.getMonth()] +" "+ element.due.getDate()%>
+                  </p>
+                </div>
+                <div class="flex-1 text-right">
+                  <p class="font-semibold md:text-base text-sm">Me to 
+                    <%= String(element.who).charAt(0).toUpperCase() + String(element.who).slice(1) %></p>
+                  <p
+                    class="font-normal text-xs md:text-sm text-purple-200/60 md:-mt-0.5 group-hover:text-purple-200/80"
+                  >
+                    <%= element.reason %>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+
+          <%}else  { %>
 
           <div
             class="bg-blue-400/10 mt-2 mx-2 rounded text-white px-4 py-2 border border-blue-500/20 hover:bg-blue-500/50 transition-all hover:shadow-md hover:shadow-blue-600/30 group"
           >
             <div class="flex items-center">
               <div class="flex-1">
-                <p class="font-semibold md:text-base text-sm">Alyson</p>
+                <p class="font-semibold md:text-base text-sm"><%= String(element.who).charAt(0).toUpperCase() + String(element.who).slice(1) %></p>
                 <p
                   class="font-normal text-xs md:text-sm text-blue-200/60 md:-mt-0.5 group-hover:text-blue-200/80"
                 >
-                  Borrowed some for boba
+                <%= element.reason %>
                 </p>
               </div>
               <div class="font-semibold text-lg md:text-xl">
-                <p class="text-blue-400/90 group-hover:text-blue-400">$5.00</p>
+                <p class="text-blue-400/90 group-hover:text-blue-400">$<%= element.amount.toFixed(2) %></p>
                 <p
                   class="font-medium text-xs text-blue-200/60 text-right group-hover:text-blue-200/80"
                 >
-                  Dec 30
+                <%= monthsShort[element.due.getMonth()] +" "+ element.due.getDate()%>
                 </p>
               </div>
             </div>
           </div>
 
-          <div
-            class="bg-blue-400/10 mt-2 mx-2 rounded text-white px-4 py-2 border border-blue-500/20 hover:bg-blue-500/50 transition-all hover:shadow-md hover:shadow-blue-600/30 group"
-          >
-            <div class="flex items-center">
-              <div class="flex-1">
-                <p class="font-semibold md:text-base text-sm">Lana</p>
-                <p
-                  class="font-normal text-xs md:text-sm text-blue-200/60 md:-mt-0.5 group-hover:text-blue-200/80"
-                >
-                  She doesn't have cash
-                </p>
-              </div>
-              <div class="font-semibold text-lg md:text-xl">
-                <p class="text-blue-400/90 group-hover:text-blue-400">$10.00</p>
-                <p
-                  class="font-medium text-xs text-blue-200/60 text-right group-hover:text-blue-200/80"
-                >
-                  Jan 3
-                </p>
-              </div>
-            </div>
-          </div>
+          <% }} %>
 
-          <div
-            class="bg-purple-400/10 mt-2 mx-2 rounded text-white px-4 py-2 border border-purple-500/20 hover:bg-purple-500/50 transition-all hover:shadow-md hover:shadow-purple-600/30 group"
-          >
-            <div class="flex items-center">
-              <div class="font-semibold text-lg md:text-xl">
-                <p class="text-purple-400/90 group-hover:text-purple-400">
-                  $2.00
-                </p>
-                <p
-                  class="font-medium text-xs text-purple-200/60 group-hover:text-purple-200/80"
-                >
-                  Jan 5
-                </p>
-              </div>
-              <div class="flex-1 text-right">
-                <p class="font-semibold md:text-base text-sm">Me to Rain</p>
-                <p
-                  class="font-normal text-xs md:text-sm text-purple-200/60 md:-mt-0.5 group-hover:text-purple-200/80"
-                >
-                  Needed small cash
-                </p>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>

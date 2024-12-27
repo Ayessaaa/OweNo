@@ -15,6 +15,7 @@ const { render } = require("ejs");
 dotenv.config({ path: ".env" });
 
 const authController = require("./controller/authController");
+const siteController = require("./controller/siteController");
 
 const app = express();
 
@@ -58,20 +59,7 @@ app.get("/", (req, res) => {
   res.redirect("/home");
 });
 
-app.get("/home", (req, res) => {
-  console.log(req.session.username);
-  const isLoggedIn = req.session.isLoggedIn;
-
-  if (isLoggedIn) {
-    res.render("index", {
-      username:
-        String(req.session.username).charAt(0).toUpperCase() +
-        String(req.session.username).slice(1),
-    });
-  } else {
-    res.redirect("/log-in");
-  }
-});
+app.get("/home", siteController.home);
 
 app.get("/my-debt-details", (req, res) => {
   const isLoggedIn = req.session.isLoggedIn;
@@ -103,39 +91,11 @@ app.get("/they-owe", (req, res) => {
   }
 });
 
-app.get("/i-borrow", (req, res) => {
-  const isLoggedIn = req.session.isLoggedIn;
+app.get("/i-borrow", siteController.iBorrow);
+app.post("/i-borrow", siteController.iBorrowPost);
 
-  if (isLoggedIn) {
-    const { from, reason, due, amount } = req.body;
-    console.log(from, reason, due, amount);
-    res.render("iBorrow");
-  } else {
-    res.redirect("/log-in");
-  }
-});
-
-app.get("/i-borrow", (req, res) => {
-  const isLoggedIn = req.session.isLoggedIn;
-
-  if (isLoggedIn) {
-    const { from, reason, due, amount } = req.body;
-    console.log(from, reason, due, amount);
-    res.render("iBorrow");
-  } else {
-    res.redirect("/log-in");
-  }
-});
-
-app.get("/they-borrow", (req, res) => {
-  const isLoggedIn = req.session.isLoggedIn;
-
-  if (isLoggedIn) {
-    res.render("theyBorrow");
-  } else {
-    res.redirect("/log-in");
-  }
-});
+app.get("/they-borrow", siteController.theyBorrow);
+app.post("/they-borrow", siteController.theyBorrowPost);
 
 app.get("/my-debt-details", (req, res) => {
   const isLoggedIn = req.session.isLoggedIn;

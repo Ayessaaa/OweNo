@@ -5,8 +5,10 @@ const userSchema = new Schema(
   {
     username: { type: String, require: true },
     password: { type: String, require: true },
+    iowe: { type: Number, require: true, default:0 },
+    theyowe: { type: Number, require: true, default:0 },
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 const User = mongoose.model("User", userSchema);
