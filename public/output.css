@@ -1782,6 +1782,11 @@ video {
   background-color: rgb(79 70 229 / 0.9);
 }
 
+.active\:bg-purple-600:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 51 234 / var(--tw-bg-opacity, 1));
+}
+
 .active\:bg-purple-600\/40:active {
   background-color: rgb(147 51 234 / 0.4);
 }
@@ -1804,6 +1809,11 @@ video {
 
 .active\:bg-violet-600\/50:active {
   background-color: rgb(124 58 237 / 0.5);
+}
+
+.active\:bg-blue-600:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));
 }
 
 .active\:ring-blue-600\/50:active {

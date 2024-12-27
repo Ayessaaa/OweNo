@@ -71,7 +71,9 @@
       </p>
     </div>
 
-    <div class="lg:w-1/2 w-4/5 2xl:w-1/3 3xl:w-1/3 mx-auto mt-10 transition-all">
+    <div
+      class="lg:w-1/2 w-4/5 2xl:w-1/3 3xl:w-1/3 mx-auto mt-10 transition-all"
+    >
       <p class="font-semibold text-3xl ml-5 text-slate-300">
         I
         <span
@@ -84,6 +86,9 @@
       </p>
     </div>
 
+    <% const monthsShort = [ "Jan", "Febr", "Mar", "Apr", "May", "Jun", "Jul",
+    "Aug", "Sep", "Oct", "Nov", "Dec", ]; %>
+
     <div
       class="lg:w-1/2 w-4/5 py-5 px-0 md:p-5 mx-auto 2xl:w-1/3 3xl:w-1/3 transition-all"
     >
@@ -92,19 +97,21 @@
       >
         <div class="flex items-center">
           <div class="flex-1">
-            <p class="font-semibold md:text-lg text-base">Lana</p>
+            <p class="font-semibold md:text-lg text-base">
+              <%= debtData.who %>
+            </p>
             <p
               class="font-normal text-sm md:text-base text-purple-200/60 md:-mt-0.5 group-hover:text-purple-200/80"
             >
-              She doesn't have cash
+              <%= debtData.reason %>
             </p>
           </div>
           <div class="font-semibold text-xl md:text-2xl">
-            <p class="text-purple-400/90 group-hover:text-purple-400">$10.00</p>
+            <p class="text-purple-400/90 group-hover:text-purple-400">$<%= debtData.amount.toFixed(2) %></p>
             <p
               class="font-medium text-sm text-purple-200/60 text-right group-hover:text-purple-200/80"
             >
-              Jan 3
+            <%= monthsShort[debtData.due.getMonth()] +" "+ debtData.due.getDate()%>
             </p>
           </div>
         </div>
@@ -123,7 +130,7 @@
                   clip-rule="evenodd"
                 />
               </svg>
-              12-25-24
+              <%= monthsShort[debtData.due.getMonth()] +" "+ debtData.due.getDate()%>
             </p>
             <p class="text-xs font-medium place-items-center flex">
               <svg
@@ -139,17 +146,40 @@
                 />
               </svg>
 
-              1:32 AM
+              <% 
+                  var hour = debtData.createdAt.getHours(); 
+                  var minute = debtData.createdAt.getMinutes();
+                  var am_pm = '';
+
+                  if (hour < 12) { 
+                    if (hour === 0) { 
+                      hour = 12;  // Midnight case
+                    }
+                    am_pm = 'AM'; 
+                  } else { 
+                    if (hour === 12) {
+                      hour = 12;  // Noon case
+                    } else {
+                      hour -= 12; // Convert PM time
+                    }
+                    am_pm = 'PM'; 
+                  }
+                %>
+
+                <%= hour+":"+minute+" "+am_pm%>
             </p>
           </div>
         </div>
       </div>
       <div>
-        <div class="m-2 border py-3 px-4 border-purple-500/50 w-fit rounded-lg ml-auto">
+        <div
+          class="m-2 border py-3 px-4 border-purple-500/50 w-fit rounded-lg ml-auto"
+        >
           <label for="amount" class="text-purple-400 font-semibold"
             >Pay Debt</label
           ><br />
-          <span class="text-purple-500 align-bottom font-semibold mt-2 text-lg mr-1"
+          <span
+            class="text-purple-500 align-bottom font-semibold mt-2 text-lg mr-1"
             >$</span
           >
           <input
@@ -167,21 +197,27 @@
         </div>
       </div>
 
-      <p class="text-center text-white/80 font-semibold text-base mt-10">Payment History</p>
-      <div class="m-2 border border-sky-500/50 text-sky-500  flex rounded-lg pl-4 pr-1 py-1 font-semibold">
-        <p class="flex-1">- $5.00 </p>
-        <div class=" flex-1">
+      <p class="text-center text-white/80 font-semibold text-base mt-10">
+        Payment History
+      </p>
+      <div
+        class="m-2 border border-sky-500/50 text-sky-500 flex rounded-lg pl-4 pr-1 py-1 font-semibold"
+      >
+        <p class="flex-1">- $5.00</p>
+        <div class="flex-1">
           <div class="mx-auto w-fit">
-            <span class="mx-auto font-medium border rounded-full border-violet-500/80 px-3 text-xs bg-violet-500/10 text-violet-300/60">12-27-24</span>
+            <span
+              class="mx-auto font-medium border rounded-full border-violet-500/80 px-3 text-xs bg-violet-500/10 text-violet-300/60"
+              >12-27-24</span
+            >
           </div>
-          
         </div>
-        <div class=" flex-1">
-          <div class="bg-sky-600/80 px-3 rounded-sm text-white w-fit ml-auto">$5.00</div>
+        <div class="flex-1">
+          <div class="bg-sky-600/80 px-3 rounded-sm text-white w-fit ml-auto">
+            $5.00
+          </div>
         </div>
-        
       </div>
-      
     </div>
   </body>
 </html>

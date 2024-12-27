@@ -35,26 +35,31 @@
       class="w-fit mx-auto mb-10 bg-blue-500/10 rounded-full px-3 py-0.5 border border-blue-400/20 text-md md:text-lg"
     >
       <button
+        onclick="window.location.href = '/home'"
         class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
       >
         Home
       </button>
       <button
+        onclick="window.location.href = '/i-owe'"
         class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
       >
         I Owe
       </button>
       <button
+        onclick="window.location.href = '/they-owe'"
         class="bg-clip-text bg-gradient-to-tr text-transparent from-purple-500 to-sky-500 font-medium py-1 sm:px-5 px-2 rounded-full transition-all hover:scale-105"
       >
         They Owe
       </button>
       <button
+        onclick="window.location.href = '/history'"
         class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
       >
         History
       </button>
       <button
+        onclick="window.location.href = '/split-the-bill'"
         class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
       >
         Split the Bill
@@ -87,7 +92,9 @@
       </p>
     </div>
 
-    <form action="/they-borrow" method="POST"
+    <form
+      action="/they-borrow"
+      method="POST"
       class="py-5 px-0 md:p-5 mx-auto 2xl:w-2/5 xl:w-1/2 sm:w-2/3 w-4/5 transition-all"
     >
       <div class="w-fit mx-auto">
@@ -111,7 +118,8 @@
               <label for="borrower" class="text-blue-400 font-medium"
                 >Borrower:</label
               >
-              <input required
+              <input
+                required
                 type="text"
                 name="borrower"
                 placeholder="Name"
@@ -122,7 +130,8 @@
               <label for="reason" class="text-blue-400 font-medium"
                 >Reason:</label
               >
-              <input required
+              <input
+                required
                 type="text"
                 name="reason"
                 placeholder="Details"
@@ -133,7 +142,8 @@
               <label for="due" class="text-blue-400 font-medium"
                 >Due Date:</label
               >
-              <input required
+              <input
+                required
                 type="date"
                 name="due"
                 placeholder="Date"
@@ -145,11 +155,11 @@
           <div
             class="bg-blue-600/10 rounded-md px-3 py-3 text-center h-fit sm:mt-0 mt-5"
           >
-            <label for="amount" class="text-blue-400 font-medium"
-              >Amount</label
+            <label for="amount" class="text-blue-400 font-medium">Amount</label
             ><br />
             <span class="text-white align-bottom font-semibold mr-1">$</span>
-            <input required
+            <input
+              required
               placeholder="-"
               type="number"
               title="amount"
@@ -160,7 +170,8 @@
         </div>
       </div>
       <div class="mx-auto w-fit mt-3">
-        <button type="submit"
+        <button
+          type="submit"
           class="bg-blue-600/80 w-fit py-1 px-5 rounded-md text-white font-semibold mx-auto text-lg shadow-md shadow-blue-600/30 hover:bg-blue-600 transition-all hover:scale-105 hover:shadow-600/40 active:bg-blue-600/90"
         >
           Submit

@@ -71,25 +71,9 @@ app.get("/my-debt-details", (req, res) => {
   }
 });
 
-app.get("/i-owe", (req, res) => {
-  const isLoggedIn = req.session.isLoggedIn;
+app.get("/i-owe", siteController.iOwe);
 
-  if (isLoggedIn) {
-    res.render("iOwe");
-  } else {
-    res.redirect("/log-in");
-  }
-});
-
-app.get("/they-owe", (req, res) => {
-  const isLoggedIn = req.session.isLoggedIn;
-
-  if (isLoggedIn) {
-    res.render("theyOwe");
-  } else {
-    res.redirect("/log-in");
-  }
-});
+app.get("/they-owe", siteController.theyOwe);
 
 app.get("/i-borrow", siteController.iBorrow);
 app.post("/i-borrow", siteController.iBorrowPost);
@@ -97,15 +81,7 @@ app.post("/i-borrow", siteController.iBorrowPost);
 app.get("/they-borrow", siteController.theyBorrow);
 app.post("/they-borrow", siteController.theyBorrowPost);
 
-app.get("/my-debt-details", (req, res) => {
-  const isLoggedIn = req.session.isLoggedIn;
-
-  if (isLoggedIn) {
-    res.render("myDebtDetails");
-  } else {
-    res.redirect("/log-in");
-  }
-});
+app.get("/my-debt-details/:id", siteController.myDebtDetails);
 
 app.get("/their-debt-details", (req, res) => {
   const isLoggedIn = req.session.isLoggedIn;

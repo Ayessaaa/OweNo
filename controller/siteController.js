@@ -70,9 +70,9 @@ const iBorrowPost = (req, res) => {
   )
     .exec()
     .then((result) => {})
-    .catch((err) =>{
-      console.log(err)
-    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   debt
     .save()
@@ -115,9 +115,9 @@ const theyBorrowPost = (req, res) => {
   )
     .exec()
     .then((result) => {})
-    .catch((err) =>{
-      console.log(err)
-    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   debt
     .save()
@@ -129,4 +129,87 @@ const theyBorrowPost = (req, res) => {
     });
 };
 
-module.exports = { home, iBorrow, iBorrowPost, theyBorrow, theyBorrowPost };
+const iOwe = (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    User.find({ username: req.session.username })
+      .exec()
+      .then((result) => {
+        IOwe.find({ user: req.session.username, owetype: "i" })
+          .sort({ due: 1 })
+          .exec()
+          .then((oweResult) => {
+            console.log(oweResult);
+            res.render("iOwe", {
+              username:
+                String(req.session.username).charAt(0).toUpperCase() +
+                String(req.session.username).slice(1),
+              userData: result[0],
+              owesData: oweResult,
+            });
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  } else {
+    res.redirect("/log-in");
+  }
+};
+
+const theyOwe = (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    User.find({ username: req.session.username })
+      .exec()
+      .then((result) => {
+        IOwe.find({ user: req.session.username, owetype: "they" })
+          .sort({ due: 1 })
+          .exec()
+          .then((oweResult) => {
+            console.log(oweResult);
+            res.render("theyOwe", {
+              username:
+                String(req.session.username).charAt(0).toUpperCase() +
+                String(req.session.username).slice(1),
+              userData: result[0],
+              owesData: oweResult,
+            });
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  } else {
+    res.redirect("/log-in");
+  }
+};
+
+const myDebtDetails = (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+  const debtID = req.params.id
+  console.log(debtID)
+
+  if (isLoggedIn) {
+    IOwe.find({_id: debtID})
+    .exec()
+    .then((result)=>{
+      console.log(result)
+    res.render("myDebtDetails", {debtData: result[0]});
+
+    })
+  } else {
+    res.redirect("/log-in");
+  }
+};
+
+module.exports = {
+  home,
+  iBorrow,
+  iBorrowPost,
+  theyBorrow,
+  theyBorrowPost,
+  iOwe,
+  theyOwe,
+  myDebtDetails
+};
