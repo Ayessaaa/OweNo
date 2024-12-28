@@ -8,6 +8,7 @@ const session = require("express-session");
 
 const User = require("../models/user");
 const IOwe = require("../models/iOwe");
+const History = require("../models/history");
 
 const home = (req, res) => {
   const isLoggedIn = req.session.isLoggedIn;
@@ -187,17 +188,110 @@ const theyOwe = (req, res) => {
 
 const myDebtDetails = (req, res) => {
   const isLoggedIn = req.session.isLoggedIn;
-  const debtID = req.params.id
-  console.log(debtID)
+  const debtID = req.params.id;
 
   if (isLoggedIn) {
-    IOwe.find({_id: debtID})
-    .exec()
-    .then((result)=>{
-      console.log(result)
-    res.render("myDebtDetails", {debtData: result[0]});
+    IOwe.find({ _id: debtID })
+      .then((resultIOwe) => {
+        History.find({ debt_id: debtID })
+          .sort({ createdAt: -1 })
+          .then((resultHistory) => {
+            console.log(resultHistory);
+            res.render("myDebtDetails", {
+              debtData: resultIOwe[0],
+              debtHistory: resultHistory,
+            });
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  } else {
+    res.redirect("/log-in");
+  }
+};
 
-    })
+const myDebtDetailsPost = (req, res) => {
+  const amount = req.body.amount;
+  const isLoggedIn = req.session.isLoggedIn;
+  const debtID = req.params.id;
+
+  if (isLoggedIn) {
+    IOwe.find({ _id: debtID })
+      .exec()
+      .then((result) => {
+        const debtPayment = new History({
+          user: req.session.username,
+          debt_id: debtID,
+          amount_paid: amount,
+          balance: result[0].balance - amount,
+        });
+
+        var paid = false;
+
+        if (result[0].balance - amount <= 0) {
+          var paid = true;
+        }
+        console.log(result[0].balance);
+        console.log(paid);
+
+        IOwe.findOneAndUpdate(
+          { _id: debtID },
+          {
+            $inc: { balance: -amount },
+            paid: paid,
+          }
+        )
+          .exec()
+          .then((result) => {})
+          .catch((err) => {
+            console.log(err);
+          });
+
+        User.findOneAndUpdate(
+          { username: req.session.username },
+          {
+            $inc: { iowe: -amount },
+          }
+        )
+          .exec()
+          .then((result) => {})
+          .catch((err) => {
+            console.log(err);
+          });
+
+        debtPayment
+          .save()
+          .then((result) => {
+            res.redirect("/my-debt-details/" + debtID);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+  }
+};
+
+const theirDebtDetails = (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+  const debtID = req.params.id;
+
+  if (isLoggedIn) {
+    IOwe.find({ _id: debtID })
+      .exec()
+      .then((result) => {
+        console.log(result);
+        res.render("theirDebtDetails", { debtData: result[0] });
+      });
+  } else {
+    res.redirect("/log-in");
+  }
+};
+
+const history = (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.render("history");
   } else {
     res.redirect("/log-in");
   }
@@ -211,5 +305,8 @@ module.exports = {
   theyBorrowPost,
   iOwe,
   theyOwe,
-  myDebtDetails
+  myDebtDetails,
+  theirDebtDetails,
+  myDebtDetailsPost,
+  history,
 };

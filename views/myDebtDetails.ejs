@@ -31,31 +31,36 @@
     <div
       class="w-fit mx-auto mb-10 bg-blue-500/10 rounded-full px-3 py-0.5 border border-blue-400/20 text-md md:text-lg"
     >
-      <button
-        class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
-      >
-        Home
-      </button>
-      <button
-        class="bg-clip-text bg-gradient-to-tr text-transparent from-purple-500 to-sky-500 font-medium py-1 sm:px-5 px-2 rounded-full transition-all hover:scale-105"
-      >
-        I Owe
-      </button>
-      <button
-        class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
-      >
-        They Owe
-      </button>
-      <button
-        class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
-      >
-        History
-      </button>
-      <button
-        class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
-      >
-        Split the Bill
-      </button>
+    <button
+      onclick="window.location.href = '/home'"
+      class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
+    >
+      Home
+    </button>
+    <button
+      onclick="window.location.href = '/i-owe'"
+      class="bg-clip-text bg-gradient-to-tr text-transparent from-purple-500 to-sky-500 font-medium py-1 sm:px-5 px-2 rounded-full transition-all hover:scale-105"
+    >
+      I Owe
+    </button>
+    <button
+      onclick="window.location.href = '/they-owe'"
+      class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
+    >
+      They Owe
+    </button>
+    <button
+      onclick="window.location.href = '/history'"
+      class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
+    >
+      History
+    </button>
+    <button
+      onclick="window.location.href = '/split-the-bill'"
+      class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
+    >
+      Split the Bill
+    </button>
     </div>
 
     <h1
@@ -86,11 +91,21 @@
       </p>
     </div>
 
+    <% if(debtData.paid) { %>
+
+    <div class="lg:w-1/2 w-4/5 px-1 md:px-6 mx-auto 2xl:w-1/3 3xl:w-1/3 transition-all mt-5">
+      <div class="border rounded-full border-green-500/40 bg-green-500/10 py-0.5">
+        <p class="text-center text-green-600 font-medium">This Debt is Paid!</p>
+      </div>
+    </div>
+
+    <% } %>
+
     <% const monthsShort = [ "Jan", "Febr", "Mar", "Apr", "May", "Jun", "Jul",
     "Aug", "Sep", "Oct", "Nov", "Dec", ]; %>
 
     <div
-      class="lg:w-1/2 w-4/5 py-5 px-0 md:p-5 mx-auto 2xl:w-1/3 3xl:w-1/3 transition-all"
+      class="lg:w-1/2 w-4/5 px-0 md:px-5 mx-auto 2xl:w-1/3 3xl:w-1/3 transition-all"
     >
       <div
         class="bg-purple-400/10 mt-2 mx-2 rounded-lg text-white px-4 py-2 border border-purple-500/20 hover:bg-purple-500/30 transition-all hover:shadow-md hover:shadow-purple-600/30 group"
@@ -107,7 +122,7 @@
             </p>
           </div>
           <div class="font-semibold text-xl md:text-2xl">
-            <p class="text-purple-400/90 group-hover:text-purple-400">$<%= debtData.amount.toFixed(2) %></p>
+            <p class="text-purple-400/90 group-hover:text-purple-400">$<%= debtData.balance.toFixed(2) %></p>
             <p
               class="font-medium text-sm text-purple-200/60 text-right group-hover:text-purple-200/80"
             >
@@ -172,7 +187,7 @@
         </div>
       </div>
       <div>
-        <div
+        <form method="POST"
           class="m-2 border py-3 px-4 border-purple-500/50 w-fit rounded-lg ml-auto"
         >
           <label for="amount" class="text-purple-400 font-semibold"
@@ -182,42 +197,75 @@
             class="text-purple-500 align-bottom font-semibold mt-2 text-lg mr-1"
             >$</span
           >
-          <input
-            placeholder="-"
+          <input required
+            placeholder="-" 
+            step="0.01"
             type="number"
             title="amount"
             name="amount"
             class="mr-1 mt-2 text-center w-20 text-lg rounded-md px-2 py-1 bg-purple-600/20 font-semibold text-white placeholder-purple-300/50 hover:bg-purple-600/30 active:bg-purple-600/50 transition-all active:ring-purple-600/50 focus:ring-1 focus:outline-none focus:ring-purple-600/50 focus:bg-purple-600/40"
           />
-          <button
+          <button type="submit"
             class="bg-purple-600/80 w-fit py-1 px-5 rounded-md text-white font-semibold mx-auto text-lg shadow-md shadow-purple-600/30 hover:bg-purple-600 transition-all hover:scale-105 hover:shadow-600/40 active:bg-purple-600/90"
           >
             Pay
           </button>
-        </div>
+        </form>
       </div>
 
       <p class="text-center text-white/80 font-semibold text-base mt-10">
         Payment History
       </p>
+
+      <%if(debtHistory.length > 0){%>
+
+      <% for (let i = 0; i < debtHistory.length; i++) {
+            const element = debtHistory[i];%>
       <div
         class="m-2 border border-sky-500/50 text-sky-500 flex rounded-lg pl-4 pr-1 py-1 font-semibold"
       >
-        <p class="flex-1">- $5.00</p>
+        <p class="">- $<%= element.amount_paid.toFixed(2)%></p>
         <div class="flex-1">
-          <div class="mx-auto w-fit">
+          <div class="mx-auto w-fit flex items-center justify-center h-full gap-0.5">
             <span
-              class="mx-auto font-medium border rounded-full border-violet-500/80 px-3 text-xs bg-violet-500/10 text-violet-300/60"
-              >12-27-24</span
-            >
+              class="mx-auto font-medium border rounded-l-full rounded-r-xl border-violet-500/80 pl-2 pr-1 text-xs bg-violet-500/10 text-violet-300/60"
+              ><% const createdDate = element.createdAt.toString().split(" ") %>
+              <%= createdDate[1]+" "+ createdDate[2]+ " "+ createdDate[3]%></span>
+              <span
+              class="mx-auto font-medium border rounded-r-full rounded-l-lg border-indigo-500/80 pr-2 pl-1 text-xs bg-indigo-500/10 text-indigo-300/60"
+              >
+              <% 
+                  var hour = element.createdAt.getHours(); 
+                  var minute = element.createdAt.getMinutes();
+                  var am_pm = '';
+
+                  if (hour < 12) { 
+                    if (hour === 0) { 
+                      hour = 12;  // Midnight case
+                    }
+                    am_pm = 'AM'; 
+                  } else { 
+                    if (hour === 12) {
+                      hour = 12;  // Noon case
+                    } else {
+                      hour -= 12; // Convert PM time
+                    }
+                    am_pm = 'PM'; 
+                  }
+                %>
+
+                <%= hour+":"+minute.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})+" "+am_pm%>
+              </span>
           </div>
         </div>
-        <div class="flex-1">
+        <div class="">
           <div class="bg-sky-600/80 px-3 rounded-sm text-white w-fit ml-auto">
-            $5.00
+            $<%= element.balance.toFixed(2)%>
           </div>
         </div>
       </div>
+
+      <% }} %>
     </div>
   </body>
 </html>

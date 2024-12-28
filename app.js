@@ -82,26 +82,11 @@ app.get("/they-borrow", siteController.theyBorrow);
 app.post("/they-borrow", siteController.theyBorrowPost);
 
 app.get("/my-debt-details/:id", siteController.myDebtDetails);
+app.post("/my-debt-details/:id", siteController.myDebtDetailsPost)
 
-app.get("/their-debt-details", (req, res) => {
-  const isLoggedIn = req.session.isLoggedIn;
+app.get("/their-debt-details/:id", siteController.theirDebtDetails);
 
-  if (isLoggedIn) {
-    res.render("theirDebtDetails");
-  } else {
-    res.redirect("/log-in");
-  }
-});
-
-app.get("/history", (req, res) => {
-  const isLoggedIn = req.session.isLoggedIn;
-
-  if (isLoggedIn) {
-    res.render("history");
-  } else {
-    res.redirect("/log-in");
-  }
-});
+app.get("/history", siteController.history);
 
 app.get("/split-the-bill", (req, res) => {
   const isLoggedIn = req.session.isLoggedIn;
