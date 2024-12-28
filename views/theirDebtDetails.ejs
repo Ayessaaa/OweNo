@@ -120,7 +120,12 @@
             </p>
           </div>
           <div class="font-semibold text-xl md:text-2xl">
-            <p class="text-blue-400/90 group-hover:text-blue-400">$<%= debtData.balance.toFixed(2) %></p>
+            <p class="text-blue-400/90 group-hover:text-blue-400">$
+            <% if (debtData.paid){ %>
+              <%= debtData.amount.toFixed(2) %>
+            <% } else { %>
+              <%= debtData.balance.toFixed(2) %>
+            <% } %></p>
             <p
               class="font-medium text-sm text-blue-200/60 text-right group-hover:text-blue-200/80"
             >

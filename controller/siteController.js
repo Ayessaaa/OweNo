@@ -372,12 +372,13 @@ const history = (req, res) => {
       .sort({ createdAt: -1 })
       .then((resultHistory) => {
         IOwe.find({ user: req.session.username })
-        
+
           .sort({ createdAt: -1 })
           .then((resultIOwe) => {
-            console.log("------------------------")
-            console.log(resultIOwe)
-            res.render("history", { paymentData: resultHistory, borrowData: resultIOwe });
+            res.render("history", {
+              paymentData: resultHistory,
+              borrowData: resultIOwe,
+            });
           })
           .catch((err) => console.log(err));
       })
