@@ -98,3 +98,13 @@ app.get("/split-the-bill", (req, res) => {
     res.redirect("/log-in");
   }
 });
+
+app.get("/split-the-bill-result", (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.render("splitTheBillResult");
+  } else {
+    res.redirect("/log-in");
+  }
+});
