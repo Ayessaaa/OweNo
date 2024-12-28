@@ -85,6 +85,7 @@ app.get("/my-debt-details/:id", siteController.myDebtDetails);
 app.post("/my-debt-details/:id", siteController.myDebtDetailsPost)
 
 app.get("/their-debt-details/:id", siteController.theirDebtDetails);
+app.post("/their-debt-details/:id", siteController.theirDebtDetailsPost)
 
 app.get("/history", siteController.history);
 

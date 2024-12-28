@@ -277,13 +277,82 @@ const theirDebtDetails = (req, res) => {
 
   if (isLoggedIn) {
     IOwe.find({ _id: debtID })
-      .exec()
-      .then((result) => {
-        console.log(result);
-        res.render("theirDebtDetails", { debtData: result[0] });
-      });
+      .then((resultIOwe) => {
+        History.find({ debt_id: debtID })
+          .sort({ createdAt: -1 })
+          .then((resultHistory) => {
+            console.log(resultHistory);
+            res.render("theirDebtDetails", {
+              debtData: resultIOwe[0],
+              debtHistory: resultHistory,
+            });
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
   } else {
     res.redirect("/log-in");
+  }
+};
+
+const theirDebtDetailsPost = (req, res) => {
+  const amount = req.body.amount;
+  const isLoggedIn = req.session.isLoggedIn;
+  const debtID = req.params.id;
+
+  if (isLoggedIn) {
+    IOwe.find({ _id: debtID })
+      .exec()
+      .then((result) => {
+        const debtPayment = new History({
+          user: req.session.username,
+          debt_id: debtID,
+          amount_paid: amount,
+          balance: result[0].balance - amount,
+        });
+
+        var paid = false;
+
+        if (result[0].balance - amount <= 0) {
+          var paid = true;
+        }
+        console.log(result[0].balance);
+        console.log(paid);
+
+        IOwe.findOneAndUpdate(
+          { _id: debtID },
+          {
+            $inc: { balance: -amount },
+            paid: paid,
+          }
+        )
+          .exec()
+          .then((result) => {})
+          .catch((err) => {
+            console.log(err);
+          });
+
+        User.findOneAndUpdate(
+          { username: req.session.username },
+          {
+            $inc: { theyowe: -amount },
+          }
+        )
+          .exec()
+          .then((result) => {})
+          .catch((err) => {
+            console.log(err);
+          });
+
+        debtPayment
+          .save()
+          .then((result) => {
+            res.redirect("/their-debt-details/" + debtID);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
   }
 };
 
@@ -308,5 +377,6 @@ module.exports = {
   myDebtDetails,
   theirDebtDetails,
   myDebtDetailsPost,
+  theirDebtDetailsPost,
   history,
 };
