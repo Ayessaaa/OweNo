@@ -224,6 +224,10 @@ const myDebtDetailsPost = (req, res) => {
           debt_id: debtID,
           amount_paid: amount,
           balance: result[0].balance - amount,
+          owetype: "i",
+          who: result[0].who,
+          reason: result[0].reason,
+          due: result[0].due,
         });
 
         var paid = false;
@@ -309,6 +313,10 @@ const theirDebtDetailsPost = (req, res) => {
           debt_id: debtID,
           amount_paid: amount,
           balance: result[0].balance - amount,
+          owetype: "they",
+          who: result[0].who,
+          reason: result[0].reason,
+          due: result[0].due,
         });
 
         var paid = false;
@@ -360,7 +368,20 @@ const history = (req, res) => {
   const isLoggedIn = req.session.isLoggedIn;
 
   if (isLoggedIn) {
-    res.render("history");
+    History.find({ user: req.session.username })
+      .sort({ createdAt: -1 })
+      .then((resultHistory) => {
+        IOwe.find({ user: req.session.username })
+        
+          .sort({ createdAt: -1 })
+          .then((resultIOwe) => {
+            console.log("------------------------")
+            console.log(resultIOwe)
+            res.render("history", { paymentData: resultHistory, borrowData: resultIOwe });
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
   } else {
     res.redirect("/log-in");
   }

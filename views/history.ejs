@@ -21,31 +21,36 @@
     <div
       class="w-fit mx-auto mb-10 bg-blue-500/10 rounded-full px-3 py-0.5 border border-blue-400/20 text-md md:text-lg"
     >
-      <button
-        class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
-      >
-        Home
-      </button>
-      <button
-        class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
-      >
-        I Owe
-      </button>
-      <button
-        class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
-      >
-        They Owe
-      </button>
-      <button
-        class="bg-clip-text bg-gradient-to-tr text-transparent from-purple-500 to-sky-500 font-medium py-1 sm:px-5 px-2 rounded-full transition-all hover:scale-105"
-      >
-        History
-      </button>
-      <button
-        class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
-      >
-        Split the Bill
-      </button>
+    <button
+      onclick="window.location.href = '/home'"
+      class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
+    >
+      Home
+    </button>
+    <button
+      onclick="window.location.href = '/i-owe'"
+      class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
+    >
+      I Owe
+    </button>
+    <button
+      onclick="window.location.href = '/they-owe'"
+      class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
+    >
+      They Owe
+    </button>
+    <button
+      onclick="window.location.href = '/history'"
+      class="bg-clip-text bg-gradient-to-tr text-transparent from-purple-500 to-sky-500 font-medium py-1 sm:px-5 px-2 rounded-full transition-all hover:scale-105"
+    >
+      History
+    </button>
+    <button
+      onclick="window.location.href = '/split-the-bill'"
+      class="text-slate-500 py-1 sm:px-5 px-2 rounded-full font-medium hover:text-slate-300 transition-all hover:scale-105"
+    >
+      Split the Bill
+    </button>
     </div>
 
     <h1
@@ -63,41 +68,47 @@
 
     <div class="md:w-3/5 mx-auto mt-10 transition-all lg:w-1/2">
       <p class="font-semibold text-3xl ml-5 text-slate-300">
-        Payment
+        
         <span
           class="text-3xl font-bold text-transparent bg-gradient-to-tr to-sky-500 from-purple-500 bg-clip-text"
           >History</span
         >
       </p>
       <p class="font-normal text-sm lg:text-base ml-5 text-slate-400">
-        Money you Borrowed
+        Payment and Borrow History
       </p>
     </div>
 
     <div
-      class="lg:w-3/5 w-4/5 py-5 px-0 md:p-5 mx-auto 2xl:w-1/2 transition-all"
+      class="lg:w-3/5 w-5/5 px-0 md:px-5 mx-auto 2xl:w-1/2 transition-all"
     >
       <div
-        class="col-span-2 rounded-lg p-3 shadow-lg mt-5 bg-blue-500/10 border border-blue-400/20 overflow-y-auto max-h-72 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-blue-950/90"
+        class="col-span-2 rounded-lg py-3 px-5 shadow-lg mt-5 bg-blue-500/10 border border-blue-400/20 overflow-y-auto max-h-72 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-blue-950/90"
       >
-        <p class="mx-auto font-semibold text-lg text-white w-fit">History</p>
+        <p class="mx-auto font-semibold text-lg text-white w-fit">Payment History</p>
 
-        <div
-          class="bg-purple-400/10 mt-2 mx-2 rounded text-white px-4 py-2 border border-purple-500/20 hover:bg-purple-500/30 transition-all hover:shadow-md hover:shadow-purple-600/30 group"
+        <% for (let i = 0; i < paymentData.length; i++) {
+          const element = paymentData[i];
+          
+          if (element.owetype === "i"){%>
+          
+        
+        <button onclick="window.location.href = '/my-debt-details/<%= element.debt_id %>'"
+          class="w-full bg-purple-400/10 mt-2  rounded text-white px-4 py-2 border border-purple-500/20 hover:bg-purple-500/30 active:bg-purple-500/50 transition-all hover:shadow-md hover:shadow-purple-600/30 group"
         >
           <div class="flex items-center">
             <div class="flex-1">
-              <p class="font-semibold md:text-lg text-base">
+              <p class="font-semibold md:text-lg text-base w-fit">
                 You pay
                 <span class="text-purple-400/90 group-hover:text-purple-400"
-                  >$5.00</span
+                  >$<%= element.amount_paid.toFixed(2) %></span
                 >
-                to David
+                to <%= element.who %>
               </p>
               <p
-                class="font-normal text-sm md:text-base text-purple-200/60 md:-mt-0.5 group-hover:text-purple-200/80"
+                class="font-normal text-sm md:text-base text-purple-200/60 md:-mt-0.5 group-hover:text-purple-200/80 w-fit"
               >
-                He doesn't have cash
+              <%= element.reason %>
               </p>
             </div>
             <div class="font-semibold text-lg md:text-xl ">
@@ -105,7 +116,8 @@
                 class="flex-col place-items-end gap-3 flex-1 text-purple-300/90 "
               >
                 <p class="text-sm font-normal place-items-center flex">
-                  12-25-24
+                  <% const iDate = element.createdAt.toString().split(" ") %>
+                <%= iDate[1]+" "+ iDate[2]+ " "+ iDate[3]%>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
@@ -120,7 +132,27 @@
                   </svg>
                 </p>
                 <p class="text-sm font-normal place-items-center flex">
-                  1:32 AM
+                  <% 
+                  var hour = element.createdAt.getHours(); 
+                  var minute = element.createdAt.getMinutes();
+                  var am_pm = '';
+
+                  if (hour < 12) { 
+                    if (hour === 0) { 
+                      hour = 12;  // Midnight case
+                    }
+                    am_pm = 'AM'; 
+                  } else { 
+                    if (hour === 12) {
+                      hour = 12;  // Noon case
+                    } else {
+                      hour -= 12; // Convert PM time
+                    }
+                    am_pm = 'PM'; 
+                  }
+                %>
+
+                <%= hour+":"+minute+" "+am_pm%>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
@@ -137,24 +169,26 @@
               </div>
             </div>
           </div>
-        </div>
+        </button>
 
-        <div
-          class="bg-blue-400/10 mt-2 mx-2 rounded text-white px-4 py-2 border border-blue-500/20 hover:bg-blue-500/30 transition-all hover:shadow-md hover:shadow-blue-600/30 group"
+        <%} else { %>
+
+        <button onclick="window.location.href = '/their-debt-details/<%= element.debt_id %>'"
+          class="w-full bg-blue-400/10 mt-2 rounded text-white px-4 py-2 border border-blue-500/20 hover:bg-blue-500/30 active:bg-blue-500/50 transition-all hover:shadow-md hover:shadow-blue-600/30 group"
         >
           <div class="flex items-center">
             <div class="flex-1">
-              <p class="font-semibold md:text-lg text-base">
-                David paid
+              <p class="font-semibold md:text-lg text-base w-fit">
+                <%= element.who %> paid
                 <span class="text-blue-400/90 group-hover:text-blue-400"
-                  >$5.00</span
+                  >$<%= element.amount_paid.toFixed(2) %></span
                 >
                 to You
               </p>
               <p
-                class="font-normal text-sm md:text-base text-blue-200/60 md:-mt-0.5 group-hover:text-blue-200/80"
+                class="font-normal text-sm md:text-base text-blue-200/60 md:-mt-0.5 group-hover:text-blue-200/80 w-fit"
               >
-                He doesn't have cash
+              <%= element.reason %>
               </p>
             </div>
             <div class="font-semibold text-lg md:text-xl ">
@@ -162,7 +196,8 @@
                 class="flex-col place-items-end gap-3 flex-1 text-blue-300/90 "
               >
                 <p class="text-sm font-normal place-items-center flex">
-                  12-25-24
+                  <% const theyDate = element.createdAt.toString().split(" ") %>
+                <%= theyDate[1]+" "+ theyDate[2]+ " "+ theyDate[3]%>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
@@ -177,7 +212,204 @@
                   </svg>
                 </p>
                 <p class="text-sm font-normal place-items-center flex">
-                  1:32 AM
+                  <% 
+                  var hour = element.createdAt.getHours(); 
+                  var minute = element.createdAt.getMinutes();
+                  var am_pm = '';
+
+                  if (hour < 12) { 
+                    if (hour === 0) { 
+                      hour = 12;  // Midnight case
+                    }
+                    am_pm = 'AM'; 
+                  } else { 
+                    if (hour === 12) {
+                      hour = 12;  // Noon case
+                    } else {
+                      hour -= 12; // Convert PM time
+                    }
+                    am_pm = 'PM'; 
+                  }
+                %>
+
+                <%= hour+":"+minute+" "+am_pm%>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    class="size-4 inline ml-1 text-blue-500"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8Zm7.75-4.25a.75.75 0 0 0-1.5 0V8c0 .414.336.75.75.75h3.25a.75.75 0 0 0 0-1.5h-2.5v-3.5Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </p>
+              </div>
+            </div>
+          </div>
+        </button>
+
+      <% }} %>
+
+        
+      </div>
+    </div>
+
+    <div
+      class="lg:w-3/5 w-5/5 px-0 md:px-5 mx-auto 2xl:w-1/2 transition-all"
+    >
+      <div
+        class="col-span-2 rounded-lg p-3 shadow-lg mt-5 bg-purple-500/10 border border-purple-400/20 overflow-y-auto max-h-72 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-purple-950/90"
+      >
+        <p class="mx-auto font-semibold text-lg text-white w-fit">Borrow History</p>
+
+
+        <% for (let i = 0; i < borrowData.length; i++) {
+          const element1 = borrowData[i];%>
+          <% if (element1.owetype === "i"){%>  
+        
+        <div
+          class="bg-purple-400/10 mt-2 mx-2 rounded text-white px-4 py-2 border border-purple-500/20 hover:bg-purple-500/30 transition-all hover:shadow-md hover:shadow-purple-600/30 group"
+        >
+          <div class="flex items-center">
+            <div class="flex-1">
+              <p class="font-semibold md:text-lg text-base">
+                I borrowed
+                <span class="text-purple-400/90 group-hover:text-purple-400"
+                  >$<%= element1.amount.toFixed(2)%></span
+                >
+                to <%= element1.who%>
+              </p>
+              <p
+                class="font-normal text-sm md:text-base text-purple-200/60 md:-mt-0.5 group-hover:text-purple-200/80"
+              >
+              <%= element1.reason%>
+              </p>
+            </div>
+            <div class="font-semibold text-lg md:text-xl ">
+              <div
+                class="flex-col place-items-end gap-3 flex-1 text-purple-300/90 "
+              >
+                <p class="text-sm font-normal place-items-center flex">
+                  <% const dateI = element1.createdAt.toString().split(" ") %>
+                <%= dateI[1]+" "+ dateI[2]+ " "+ dateI[3]%>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    class="size-4 inline ml-1 text-purple-500"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 1.75a.75.75 0 0 1 1.5 0V3h5V1.75a.75.75 0 0 1 1.5 0V3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2V1.75ZM4.5 6a1 1 0 0 0-1 1v4.5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-7Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </p>
+                <p class="text-sm font-normal place-items-center flex">
+                  <% 
+                  var hour = element1.createdAt.getHours(); 
+                  var minute = element1.createdAt.getMinutes();
+                  var am_pm = '';
+
+                  if (hour < 12) { 
+                    if (hour === 0) { 
+                      hour = 12;  // Midnight case
+                    }
+                    am_pm = 'AM'; 
+                  } else { 
+                    if (hour === 12) {
+                      hour = 12;  // Noon case
+                    } else {
+                      hour -= 12; // Convert PM time
+                    }
+                    am_pm = 'PM'; 
+                  }
+                %>
+
+                <%= hour+":"+minute+" "+am_pm%>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    class="size-4 inline ml-1 text-purple-500"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8Zm7.75-4.25a.75.75 0 0 0-1.5 0V8c0 .414.336.75.75.75h3.25a.75.75 0 0 0 0-1.5h-2.5v-3.5Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <% } else { %>
+
+        <div
+          class="bg-blue-400/10 mt-2 mx-2 rounded text-white px-4 py-2 border border-blue-500/20 hover:bg-blue-500/30 transition-all hover:shadow-md hover:shadow-blue-600/30 group"
+        >
+          <div class="flex items-center">
+            <div class="flex-1">
+              <p class="font-semibold md:text-lg text-base">
+                <%= element1.who %> borrowed
+                <span class="text-blue-400/90 group-hover:text-blue-400"
+                  >$<%= element1.amount.toFixed(2)%></span
+                >
+                from You
+              </p>
+              <p
+                class="font-normal text-sm md:text-base text-blue-200/60 md:-mt-0.5 group-hover:text-blue-200/80"
+              >
+              <%= element1.reason %>
+              </p>
+            </div>
+            <div class="font-semibold text-lg md:text-xl ">
+              <div
+                class="flex-col place-items-end gap-3 flex-1 text-blue-300/90 "
+              >
+                <p class="text-sm font-normal place-items-center flex">
+                  <% const dateThey = element1.createdAt.toString().split(" ") %>
+                <%= dateThey[1]+" "+ dateThey[2]+ " "+ dateThey[3]%>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    class="size-4 inline ml-1 text-blue-500"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 1.75a.75.75 0 0 1 1.5 0V3h5V1.75a.75.75 0 0 1 1.5 0V3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2V1.75ZM4.5 6a1 1 0 0 0-1 1v4.5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-7Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </p>
+                <p class="text-sm font-normal place-items-center flex">
+                  <% 
+                  var hour = element1.createdAt.getHours(); 
+                  var minute = element1.createdAt.getMinutes();
+                  var am_pm = '';
+
+                  if (hour < 12) { 
+                    if (hour === 0) { 
+                      hour = 12;  // Midnight case
+                    }
+                    am_pm = 'AM'; 
+                  } else { 
+                    if (hour === 12) {
+                      hour = 12;  // Noon case
+                    } else {
+                      hour -= 12; // Convert PM time
+                    }
+                    am_pm = 'PM'; 
+                  }
+                %>
+
+                <%= hour+":"+minute+" "+am_pm%>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
@@ -196,62 +428,9 @@
           </div>
         </div>
 
-        <div
-          class="bg-purple-400/10 mt-2 mx-2 rounded text-white px-4 py-2 border border-purple-500/20 hover:bg-purple-500/30 transition-all hover:shadow-md hover:shadow-purple-600/30 group"
-        >
-          <div class="flex items-center">
-            <div class="flex-1">
-              <p class="font-semibold md:text-lg text-base">
-                You borrowed
-                <span class="text-purple-400/90 group-hover:text-purple-400"
-                  >$3.00</span
-                >
-                to David
-              </p>
-              <p
-                class="font-normal text-sm md:text-base text-purple-200/60 md:-mt-0.5 group-hover:text-purple-200/80"
-              >
-                For transportation
-              </p>
-            </div>
-            <div class="font-semibold text-lg md:text-xl ">
-              <div
-                class="flex-col place-items-end gap-3 flex-1 text-purple-300/90 "
-              >
-                <p class="text-sm font-normal place-items-center flex">
-                  12-25-24
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 16 16"
-                    fill="currentColor"
-                    class="size-4 inline ml-1 text-purple-500"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 1.75a.75.75 0 0 1 1.5 0V3h5V1.75a.75.75 0 0 1 1.5 0V3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2V1.75ZM4.5 6a1 1 0 0 0-1 1v4.5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-7Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </p>
-                <p class="text-sm font-normal place-items-center flex">
-                  1:32 AM
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 16 16"
-                    fill="currentColor"
-                    class="size-4 inline ml-1 text-purple-500"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8Zm7.75-4.25a.75.75 0 0 0-1.5 0V8c0 .414.336.75.75.75h3.25a.75.75 0 0 0 0-1.5h-2.5v-3.5Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <% }} %>
+
+        
 
       </div>
     </div>
