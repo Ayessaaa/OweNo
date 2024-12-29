@@ -89,22 +89,6 @@ app.post("/their-debt-details/:id", siteController.theirDebtDetailsPost)
 
 app.get("/history", siteController.history);
 
-app.get("/split-the-bill", (req, res) => {
-  const isLoggedIn = req.session.isLoggedIn;
+app.get("/split-the-bill", siteController.splitTheBill);
 
-  if (isLoggedIn) {
-    res.render("splitTheBill");
-  } else {
-    res.redirect("/log-in");
-  }
-});
-
-app.get("/split-the-bill-result", (req, res) => {
-  const isLoggedIn = req.session.isLoggedIn;
-
-  if (isLoggedIn) {
-    res.render("splitTheBillResult");
-  } else {
-    res.redirect("/log-in");
-  }
-});
+app.post("/split-the-bill-result", siteController.splitTheBillResult);

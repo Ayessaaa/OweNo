@@ -52,6 +52,7 @@ const iBorrow = (req, res) => {
 
 const iBorrowPost = (req, res) => {
   const { from, reason, due, amount } = req.body;
+
   const debt = new IOwe({
     user: req.session.username,
     who: from,
@@ -388,6 +389,27 @@ const history = (req, res) => {
   }
 };
 
+const splitTheBill = (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.render("splitTheBill");
+  } else {
+    res.redirect("/log-in");
+  }
+};
+
+const splitTheBillResult = (req, res) => {
+  const body = req.body;
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.render("splitTheBillResult", { data: body });
+  } else {
+    res.redirect("/log-in");
+  }
+};
+
 module.exports = {
   home,
   iBorrow,
@@ -401,4 +423,6 @@ module.exports = {
   myDebtDetailsPost,
   theirDebtDetailsPost,
   history,
+  splitTheBill,
+  splitTheBillResult,
 };

@@ -182,10 +182,16 @@
 
       <div class="flex gap-5 lg:flex-row flex-col">
         <div
-          class="lg:w-1/2 col-span-2 bg-gradient-to-t from-violet-500/20 via-blue-500/20 to-sky-500/20 rounded-lg p-3 mt-5 shadow-violet-500/30"
+          class="lg:w-1/2 col-span-2 bg-gradient-to-t text-slate-300 from-violet-500/20 via-blue-500/20 to-sky-500/20 rounded-lg p-3 px-5 mt-5 shadow-violet-500/30"
         >
-          <p class="mx-auto font-semibold text-md text-white w-fit">My Debts</p>
-          <canvas id="myChart" class="mt-3"></canvas>
+          <p class="mx-auto font-semibold text-md w-fit mt-5">Welcome to Owe No!</p>
+          <p class="mx-auto font-medium text-sm w-fit mt-3 text-slate-400">A web application that helps you track you debts and the borrowed money of other people from you</p>
+          <p class="mx-auto font-semibold text-md w-fit mt-5">Features</p>
+          <p class="mx-auto font-semibold text-md w-fit mt-1">I Owe: <span class="font-medium text-sm text-slate-400"> Money you owe to other people</span></p>
+          <p class="mx-auto font-semibold text-md w-fit">They Owe: <span class="font-medium text-sm text-slate-400"> Money other people owe to you</span></p>
+          <p class="mx-auto font-semibold text-md w-fit">Split the Bill: <span class="font-medium text-sm text-slate-400"> Share the bill equally to the group</span></p>
+          
+          
         </div>
 
         <div
@@ -263,6 +269,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+
+
     <script>
       Chart.defaults.color = "white";
       Chart.defaults.font.family = "Poppins";
@@ -273,18 +281,11 @@
         type: "line",
         data: {
           labels: [
-            "Jan-1",
-            "Jan-2",
-            "Jan-3",
-            "Jan-4",
-            "Jan-5",
-            "Jan-6",
-            "Jan-7",
+          
           ],
           datasets: [
             {
               label: " Dollars ($)",
-              data: ["32", "41", "33", "33", "36", "20", "11", "22", "22"],
               borderWidth: 1,
               tension: 0.5,
               borderWidth: 3,

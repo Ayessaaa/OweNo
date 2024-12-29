@@ -46,6 +46,7 @@ const authSignUp = async (req, res) => {
       await newUser.save();
       req.session.isLoggedIn = true;
       req.session.username = username;
+
       res.redirect("/home");
     } else {
       res.redirect("/sign-up/username-taken");
@@ -83,4 +84,11 @@ const authLogIn = async (req, res) => {
   }
 };
 
-module.exports = { signUp, signUpError, logIn, logInError, authSignUp, authLogIn };
+module.exports = {
+  signUp,
+  signUpError,
+  logIn,
+  logInError,
+  authSignUp,
+  authLogIn,
+};

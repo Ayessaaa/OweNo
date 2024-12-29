@@ -10,7 +10,7 @@ const iOweSchema = new Schema(
     amount: { type: Number, require: true },
     balance: { type: Number, require: true },
     paid: { type: Boolean, require: true },
-    owetype: { type: String, require: true }
+    owetype: { type: String, require: true },
   },
   { timestamps: true }
 );
