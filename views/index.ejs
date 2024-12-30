@@ -17,7 +17,9 @@
       }
     </style>
   </head>
-  <body class="md:px-10 px-3 py-10 bg-gradient-to-l to-indigo-950 from-black">
+  <body
+    class="md:px-10 px-3 py-10 bg-gradient-to-l to-indigo-950 from-black bg-white"
+  >
     <div
       class="w-fit mx-auto mb-10 bg-blue-500/10 rounded-full px-3 py-0.5 border border-blue-400/20 text-md md:text-lg"
     >
@@ -53,17 +55,19 @@
       </button>
     </div>
 
-    <h1
-      class="mx-auto font-extrabold text-7xl text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-violet-600 to-blue-600 w-fit"
-    >
-      Owe No!
-    </h1>
-    <div
-      class="bg-gradient-to-r from-purple-500 via-violet-500 to-blue-500 w-fit mx-auto px-3 py-0.5 rounded-lg mt-2 shadow-lg shadow-violet-500/40"
-    >
-      <p class="text-white font-medium text-center">
-        track debts, keep friends.
-      </p>
+    <div class="group">
+      <h1
+        class="group-hover:scale-105 transition-all mx-auto font-extrabold text-7xl text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-violet-600 to-blue-600 w-fit"
+      >
+        Owe No!
+      </h1>
+      <div
+        class="group-hover:scale-105 delay-100 transition-all bg-gradient-to-r from-purple-500 via-violet-500 to-blue-500 w-fit mx-auto px-3 py-0.5 rounded-lg mt-2 shadow-lg shadow-violet-500/40"
+      >
+        <p class="text-white font-medium text-center">
+          track debts, keep friends.
+        </p>
+      </div>
     </div>
 
     <div class="md:w-3/5 mx-auto mt-14 transition-all lg:w-1/2">
@@ -82,12 +86,14 @@
     <div
       class="w-fit mx-auto mt-10 text-md lg:text-lg flex flex-col sm:flex-row gap-2"
     >
-      <button onclick="window.location.href = '/i-borrow'"
+      <button
+        onclick="window.location.href = '/i-borrow'"
         class="hover:scale-105 transition-all mr-2 lg:mr-5 border-blue-500 border rounded-full px-4 py-1 font-medium text-blue-500 hover:text-white hover:bg-blue-500/80 hover:shadow-md hover:shadow-blue-500/50"
       >
         I Borrowed Money
       </button>
-      <button onclick="window.location.href = '/they-borrow'"
+      <button
+        onclick="window.location.href = '/they-borrow'"
         class="hover:scale-105 transition-all border-violet-500 border rounded-full px-4 py-1 font-medium text-violet-500 hover:text-white hover:bg-violet-500/80 hover:shadow-md hover:shadow-violet-500/50"
       >
         Someone Borrowed My Money
@@ -98,7 +104,8 @@
       <div
         class="mx-auto flex flex-col md:flex-row gap-5 columns-1 md:columns-2 mt-3"
       >
-        <button onclick="window.location.href='/i-owe'"
+        <button
+          onclick="window.location.href='/i-owe'"
           class="active:bg-purple-600 flex-1 group bg-purple-500/10 border hover:border-purple-600 border-purple-500 pt-2 pb-4 px-7 items-end text-white rounded-xl shadow-lg shadow-purple-500/30 basis-5/12 transition-all hover:bg-purple-600/80 hover:shadow-purple-600/60"
         >
           <p
@@ -129,7 +136,8 @@
           </p>
         </button>
 
-        <button onclick="window.location.href='/they-owe'"
+        <button
+          onclick="window.location.href='/they-owe'"
           class="active:bg-blue-600 group bg-blue-500/10 border hover:border-blue-600 border-blue-500 pt-2 pb-4 px-7 items-end text-white rounded-xl shadow-lg shadow-blue-500/30 basis-5/12 transition-all hover:bg-blue-600/80 hover:shadow-blue-600/60"
         >
           <p
@@ -168,108 +176,128 @@
           >
             <% const months = [ "January", "February", "March", "April", "May",
             "June", "July", "August", "September", "October", "November",
-            "December", ]; 
-            const monthsShort = [ "Jan", "Febr", "Mar", "Apr", "May",
-            "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
-            "Dec", ]; 
-            const day = new Date();
-            %>
-            <%= months[day.getMonth()] %>
+            "December", ]; const monthsShort = [ "Jan", "Febr", "Mar", "Apr",
+            "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", ]; const day
+            = new Date(); %> <%= months[day.getMonth()] %>
           </p>
-          <p class="font-bold mt-3 ml-2 text-4xl lg:text-5xl text-center"><%= day.getDate() %></p>
+          <p class="font-bold mt-3 ml-2 text-4xl lg:text-5xl text-center">
+            <%= day.getDate() %>
+          </p>
         </div>
       </div>
 
       <div class="flex gap-5 lg:flex-row flex-col">
+        
         <div
-          class="lg:w-1/2 col-span-2 bg-gradient-to-t text-slate-300 from-violet-500/20 via-blue-500/20 to-sky-500/20 rounded-lg p-3 px-5 mt-5 shadow-violet-500/30"
-        >
-          <p class="mx-auto font-semibold text-md w-fit mt-5">Welcome to Owe No!</p>
-          <p class="mx-auto font-medium text-sm w-fit mt-3 text-slate-400">A web application that helps you track you debts and the borrowed money of other people from you</p>
-          <p class="mx-auto font-semibold text-md w-fit mt-5">Features</p>
-          <p class="mx-auto font-semibold text-md w-fit mt-1">I Owe: <span class="font-medium text-sm text-slate-400"> Money you owe to other people</span></p>
-          <p class="mx-auto font-semibold text-md w-fit">They Owe: <span class="font-medium text-sm text-slate-400"> Money other people owe to you</span></p>
-          <p class="mx-auto font-semibold text-md w-fit">Split the Bill: <span class="font-medium text-sm text-slate-400"> Share the bill equally to the group</span></p>
-          
-          
-        </div>
-
-        <div
-          class="lg:w-1/2 col-span-2 rounded-lg p-3 shadow-lg mt-0 lg:mt-5 bg-blue-500/10 border border-blue-400/20 overflow-y-auto min-h-72 max-h-72 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-blue-950/90"
+          class="lg:w-1/2 col-span-2 rounded-lg p-3 shadow-lg mt-5 bg-blue-500/10 border border-blue-400/20 overflow-y-auto min-h-72 max-h-72 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-blue-950/90"
         >
           <p class="mx-auto font-semibold text-md text-white w-fit">
             Debts Due
           </p>
 
-          <% for (let i = 0; i < owesData.length; i++) {
-            const element = owesData[i];
-            if (!element.paid){
-            %>
-            
+          <% for (let i = 0; i < owesData.length; i++) { const element =
+          owesData[i]; if (!element.paid){ %> <% if (element.owetype === "i"
+          ){%>
 
-          <% if (element.owetype === "i" ){%>
-
-            <button onclick="window.location.href = '/my-debt-details/<%= element._id %>'"
-              class="w-full group bg-purple-400/10 mt-2  rounded text-white px-4 py-2 border border-purple-500/20 hover:bg-purple-500/50 transition-all hover:shadow-md hover:shadow-purple-600/30"
-            >
-              <div class="flex items-center">
-                <div class="font-semibold text-lg md:text-xl">
-                  <p class="text-purple-400/90 group-hover:text-purple-400">
-                    $<%= element.balance.toFixed(2) %>
-                  </p>
-                  <p
-                    class="font-medium text-xs text-purple-200/60 group-hover:text-purple-200/80 w-fit"
-                  >
-                    <%= monthsShort[element.due.getMonth()] +" "+ element.due.getDate()%>
-                  </p>
-                </div>
-                <div class="flex-1 text-right">
-                  <p class="font-semibold md:text-base text-sm">Me to 
-                    <%= String(element.who).charAt(0).toUpperCase() + String(element.who).slice(1) %></p>
-                  <p
-                    class="font-normal text-xs md:text-sm text-purple-200/60 md:-mt-0.5 group-hover:text-purple-200/80"
-                  >
-                    <%= element.reason %>
-                  </p>
-                </div>
+          <button
+            onclick="window.location.href = '/my-debt-details/<%= element._id %>'"
+            class="w-full group bg-purple-400/10 mt-2 rounded text-white px-4 py-2 border border-purple-500/20 hover:bg-purple-500/50 transition-all hover:shadow-md hover:shadow-purple-600/30"
+          >
+            <div class="flex items-center">
+              <div class="font-semibold text-lg md:text-xl">
+                <p class="text-purple-400/90 group-hover:text-purple-400">
+                  $<%= element.balance.toFixed(2) %>
+                </p>
+                <p
+                  class="font-medium text-xs text-purple-200/60 group-hover:text-purple-200/80 w-fit"
+                >
+                  <%= monthsShort[element.due.getMonth()] +" "+
+                  element.due.getDate()%>
+                </p>
               </div>
-            </button>
+              <div class="flex-1 text-right">
+                <p class="font-semibold md:text-base text-sm">
+                  Me to <%= String(element.who).charAt(0).toUpperCase() +
+                  String(element.who).slice(1) %>
+                </p>
+                <p
+                  class="font-normal text-xs md:text-sm text-purple-200/60 md:-mt-0.5 group-hover:text-purple-200/80"
+                >
+                  <%= element.reason %>
+                </p>
+              </div>
+            </div>
+          </button>
 
-          <%}else  { %>
+          <%}else { %>
 
-          <button onclick="window.location.href = '/their-debt-details/<%= element._id %>'"
-            class="w-full bg-blue-400/10 mt-2  rounded text-white px-4 py-2 border border-blue-500/20 hover:bg-blue-500/50 transition-all hover:shadow-md hover:shadow-blue-600/30 group"
+          <button
+            onclick="window.location.href = '/their-debt-details/<%= element._id %>'"
+            class="w-full bg-blue-400/10 mt-2 rounded text-white px-4 py-2 border border-blue-500/20 hover:bg-blue-500/50 transition-all hover:shadow-md hover:shadow-blue-600/30 group"
           >
             <div class="flex items-center">
               <div class="flex-1">
-                <p class="font-semibold md:text-base text-sm w-fit"><%= String(element.who).charAt(0).toUpperCase() + String(element.who).slice(1) %></p>
+                <p class="font-semibold md:text-base text-sm w-fit">
+                  <%= String(element.who).charAt(0).toUpperCase() +
+                  String(element.who).slice(1) %>
+                </p>
                 <p
                   class="w-fit font-normal text-xs md:text-sm text-blue-200/60 md:-mt-0.5 group-hover:text-blue-200/80"
                 >
-                <%= element.reason %>
+                  <%= element.reason %>
                 </p>
               </div>
               <div class="font-semibold text-lg md:text-xl">
-                <p class="text-blue-400/90 group-hover:text-blue-400">$<%= element.balance.toFixed(2) %></p>
+                <p class="text-blue-400/90 group-hover:text-blue-400">
+                  $<%= element.balance.toFixed(2) %>
+                </p>
                 <p
                   class="font-medium text-xs text-blue-200/60 text-right group-hover:text-blue-200/80"
                 >
-                <%= monthsShort[element.due.getMonth()] +" "+ element.due.getDate()%>
+                  <%= monthsShort[element.due.getMonth()] +" "+
+                  element.due.getDate()%>
                 </p>
               </div>
             </div>
           </button>
 
           <% }}} %>
-
-          
         </div>
+        <div
+          class="mt-0 lg:mt-5 mb-10 lg:mb-0 lg:w-1/2 col-span-2 bg-gradient-to-t text-slate-300 from-violet-500/20 via-blue-500/20 to-sky-500/20 rounded-lg py-8 px-5  shadow-violet-500/30"
+        >
+          <p class="mx-auto font-semibold text-md w-fit">
+            Welcome to Owe No!
+          </p>
+          <p class="mx-auto font-medium text-sm w-fit mt-3 text-slate-400">
+            A web application that helps you track you debts and the borrowed
+            money of other people from you
+          </p>
+          <p class="mx-auto font-semibold text-md w-fit mt-5">Features</p>
+          <p class="mx-auto font-semibold text-md w-fit mt-1">
+            I Owe:
+            <span class="font-medium text-sm text-slate-400">
+              Money you owe to other people</span
+            >
+          </p>
+          <p class="mx-auto font-semibold text-md w-fit">
+            They Owe:
+            <span class="font-medium text-sm text-slate-400">
+              Money other people owe to you</span
+            >
+          </p>
+          <p class="mx-auto font-semibold text-md w-fit">
+            Split the Bill:
+            <span class="font-medium text-sm text-slate-400">
+              Share the bill equally to the group</span
+            >
+          </p>
+        </div>
+
       </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
 
     <script>
       Chart.defaults.color = "white";
@@ -280,9 +308,7 @@
       new Chart(ctx, {
         type: "line",
         data: {
-          labels: [
-          
-          ],
+          labels: [],
           datasets: [
             {
               label: " Dollars ($)",
