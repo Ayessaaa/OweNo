@@ -10,6 +10,10 @@ const User = require("../models/user");
 const IOwe = require("../models/iOwe");
 const History = require("../models/history");
 
+const guide = (req, res)=>{
+  res.render("guide")
+}
+
 const home = (req, res) => {
   const isLoggedIn = req.session.isLoggedIn;
 
@@ -411,6 +415,7 @@ const splitTheBillResult = (req, res) => {
 };
 
 module.exports = {
+  guide,
   home,
   iBorrow,
   iBorrowPost,

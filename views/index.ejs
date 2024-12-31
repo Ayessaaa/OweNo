@@ -88,14 +88,20 @@
     >
       <button
         onclick="window.location.href = '/i-borrow'"
-        class="hover:scale-105 transition-all mr-2 lg:mr-5 border-blue-500 border rounded-full px-4 py-1 font-medium text-blue-500 hover:text-white hover:bg-blue-500/80 hover:shadow-md hover:shadow-blue-500/50"
+        class="flex place-items-center gap-2 hover:scale-105 transition-all mr-2 lg:mr-5 border-blue-500 border rounded-full px-3 py-1 font-medium text-blue-500 hover:text-white hover:bg-blue-500/80 hover:shadow-md hover:shadow-blue-500/50"
       >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-5 inline">
+        <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+      </svg>
         I Borrowed Money
       </button>
       <button
         onclick="window.location.href = '/they-borrow'"
-        class="hover:scale-105 transition-all border-violet-500 border rounded-full px-4 py-1 font-medium text-violet-500 hover:text-white hover:bg-violet-500/80 hover:shadow-md hover:shadow-violet-500/50"
+        class="flex place-items-center gap-2 hover:scale-105 transition-all border-violet-500 border rounded-full px-3 py-1 font-medium text-violet-500 hover:text-white hover:bg-violet-500/80 hover:shadow-md hover:shadow-violet-500/50"
       >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-5 inline">
+        <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+      </svg>
         Someone Borrowed My Money
       </button>
     </div>
@@ -264,7 +270,7 @@
           <% }}} %>
         </div>
         <div
-          class="mt-0 lg:mt-5 mb-10 lg:mb-0 lg:w-1/2 col-span-2 bg-gradient-to-t text-slate-300 from-violet-500/20 via-blue-500/20 to-sky-500/20 rounded-lg py-8 px-5  shadow-violet-500/30"
+          class="text-center mt-0 lg:mt-5 mb-10 lg:mb-0 lg:w-1/2 col-span-2 bg-gradient-to-t text-slate-300 from-violet-500/20 via-blue-500/20 to-sky-500/20 rounded-lg py-8 px-5  shadow-violet-500/30"
         >
           <p class="mx-auto font-semibold text-md w-fit">
             Welcome to Owe No!
@@ -274,13 +280,13 @@
             money of other people from you
           </p>
           <p class="mx-auto font-semibold text-md w-fit mt-5">Features</p>
-          <p class="mx-auto font-semibold text-md w-fit mt-1">
+          <p class="mx-auto font-semibold text-md w-fit mt-1 text-purple-400">
             I Owe:
             <span class="font-medium text-sm text-slate-400">
               Money you owe to other people</span
             >
           </p>
-          <p class="mx-auto font-semibold text-md w-fit">
+          <p class="mx-auto font-semibold text-md w-fit text-blue-400">
             They Owe:
             <span class="font-medium text-sm text-slate-400">
               Money other people owe to you</span
@@ -297,55 +303,6 @@
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-      Chart.defaults.color = "white";
-      Chart.defaults.font.family = "Poppins";
-      const ctx = document.getElementById("myChart");
-      const bar = document.getElementById("barChart");
-
-      new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: [],
-          datasets: [
-            {
-              label: " Dollars ($)",
-              borderWidth: 1,
-              tension: 0.5,
-              borderWidth: 3,
-              borderColor: "white",
-              color: "white",
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            legend: {
-              labels: {
-                // This more specific font property overrides the global property
-                font: {
-                  size: 11,
-                },
-              },
-            },
-          },
-          scales: {
-            x: {
-              grid: {
-                color: "rgba(255, 255, 255, .2)",
-              },
-            },
-            y: {
-              beginAtZero: true,
-              grid: {
-                color: "rgba(255, 255, 255, .2)",
-              },
-            },
-          },
-        },
-      });
-    </script>
+    
   </body>
 </html>

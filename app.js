@@ -43,6 +43,8 @@ app.use(
   })
 );
 
+app.get("/guide", siteController.guide)
+
 app.get("/sign-up", authController.signUp);
 
 app.get("/sign-up/:err", authController.signUpError);
@@ -65,7 +67,17 @@ app.get("/my-debt-details", (req, res) => {
   const isLoggedIn = req.session.isLoggedIn;
 
   if (isLoggedIn) {
-    res.render("myDebtDetails");
+    res.redirect("/i-owe");
+  } else {
+    res.redirect("/log-in");
+  }
+});
+
+app.get("/their-debt-details", (req, res) => {
+  const isLoggedIn = req.session.isLoggedIn;
+
+  if (isLoggedIn) {
+    res.redirect("/they-owe");
   } else {
     res.redirect("/log-in");
   }
