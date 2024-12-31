@@ -154,16 +154,16 @@ This calculates the total bill and splits it equally to the group size.
 - Additional tax/ tip
 - Group Size
 
-## Resources
+## 📚 Resources
 I have used ChatGPT to help me from debugging some parts of the project. Additionally Here are some resources that helped me create Owe No!
 - [Log In, Sign Up](https://blog.logrocket.com/building-simple-login-form-node-js/)
 - [Hashing Passwords](https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/)
 - [Session Managment](https://dev.to/saint_vandora/how-to-implement-session-management-in-nodejs-applications-5emm)
 
-## Contributing
+## 📝 Contributing
 
 This repo is open for contributions! Just fork the repository, create a new branch and open a pull request.
 
-## License
+## ⚖️ License
 
 This project is licensed under the MIT License.
