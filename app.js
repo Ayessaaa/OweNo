@@ -1,7 +1,3 @@
-// https://blog.logrocket.com/building-simple-login-form-node-js/
-// https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
-// https://dev.to/saint_vandora/how-to-implement-session-management-in-nodejs-applications-5emm
-
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
@@ -43,7 +39,7 @@ app.use(
   })
 );
 
-app.get("/guide", siteController.guide)
+app.get("/guide", siteController.guide);
 
 app.get("/sign-up", authController.signUp);
 
@@ -56,6 +52,16 @@ app.get("/log-in/:err", authController.logInError);
 app.post("/auth/signup", authController.authSignUp);
 
 app.post("/auth/login", authController.authLogIn);
+
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/log-in");
+    }
+  });
+});
 
 app.get("/", (req, res) => {
   res.redirect("/home");
@@ -94,10 +100,10 @@ app.get("/they-borrow", siteController.theyBorrow);
 app.post("/they-borrow", siteController.theyBorrowPost);
 
 app.get("/my-debt-details/:id", siteController.myDebtDetails);
-app.post("/my-debt-details/:id", siteController.myDebtDetailsPost)
+app.post("/my-debt-details/:id", siteController.myDebtDetailsPost);
 
 app.get("/their-debt-details/:id", siteController.theirDebtDetails);
-app.post("/their-debt-details/:id", siteController.theirDebtDetailsPost)
+app.post("/their-debt-details/:id", siteController.theirDebtDetailsPost);
 
 app.get("/history", siteController.history);
 
