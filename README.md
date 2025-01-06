@@ -59,14 +59,14 @@ OweNo Project -> OweNoCluster
 OweNo Project -> OweNoCluster -> OweNoDB
 ```
 
-8. Create your .env file and paste you DBURI and secret
+7. Create your .env file and paste you DBURI and secret
 
 ```
 DB_URI=
 secret=
 ```
 
-9. Start the Nodemon
+8. Start the Nodemon
 
 ```
 nodemon app
